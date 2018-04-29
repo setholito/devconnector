@@ -8,7 +8,7 @@ const passport = require('passport')
 
 // Load Input Validation
 const validateRegisterInput = require('../../validation/register')
-const validateLoginInput = require('../../validation/register')
+const validateLoginInput = require('../../validation/login')
 
 // Load user model
 const User = require('../../models/User')
@@ -86,7 +86,7 @@ router.post('/login', (req, res) => {
     User.findOne({ email }).then(user => {
         // Check for user
         if (!user) {
-            errors.email = 'User not found';
+            errors.email = 'User not found'
             return res.status(404).json(errors)
         }
 
