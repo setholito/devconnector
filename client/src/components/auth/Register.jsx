@@ -17,19 +17,30 @@ class Register extends Component {
 
     render() {
         return (
-            <div className="register">
-                <h3 className="title is-3">Register</h3>
-                <form onSubmit={this.handleSubmit}>
-                    <TextInput label="Email" />
-                    <TextInput label="First Name" />
-                    <TextInput label="Last Name" />
-                    <TextInput label="Password" />
-                    <TextInput label="Confirm Password" />
-                    <button className="button is-primary" type="submit">
-                        Submit
-                    </button>
-                </form>
-            </div>
+            <section className="section register">
+                <div className="container">
+                    <div className="columns">
+                        <div className="column is-4 is-offset-4">
+                            <h3 className="title is-3">Register</h3>
+                            <div className="box">
+                                <form onSubmit={this.handleSubmit}>
+                                    <TextInput label="Email" />
+                                    <TextInput label="First Name" />
+                                    <TextInput label="Last Name" />
+                                    <TextInput label="Password" />
+                                    <TextInput label="Confirm Password" />
+                                    <button
+                                        className="button is-primary"
+                                        type="submit"
+                                    >
+                                        Submit
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         )
     }
 }
