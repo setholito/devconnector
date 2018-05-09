@@ -1,0 +1,9 @@
+// Import the initial variables
+@import '../node_modules/bulma/sass/utilities/initial-variables';
+@import '../node_modules/bulma/sass/utilities/functions';
+
+// Add new color variables to the color map.
+@import '../node_modules/bulma/sass/utilities/derived-variables';
+
+// 6. Import the rest of Bulma
+@import '../node_modules/bulma/bulma';
