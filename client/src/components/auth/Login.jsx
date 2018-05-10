@@ -7,12 +7,30 @@ class Login extends Component {
     constructor(props) {
         super(props)
 
+        this.state = {
+            email: '',
+            password: '',
+            errors: {}
+        }
+
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleTextUpdate = this.handleTextUpdate.bind(this)
     }
 
     handleSubmit(e) {
         e.preventDefault()
-        console.log('Submitted from form!')
+        const { email, password } = this.state
+
+        const userCredentials = {
+            email,
+            password
+        }
+
+        console.log(userCredentials)
+    }
+
+    handleTextUpdate(id, text) {
+        this.setState({ [id]: text })
     }
 
     render() {
@@ -21,11 +39,20 @@ class Login extends Component {
                 <div className="container">
                     <div className="columns">
                         <div className="column is-4 is-offset-4">
-                            <h3 className="title is-3">Login</h3>
+                            <h1 className="title is-1">Login</h1>
                             <div className="box">
                                 <form onSubmit={this.handleSubmit}>
-                                    <TextInput label="Email" />
-                                    <TextInput label="Password" />
+                                    <TextInput
+                                        id="email"
+                                        label="Email"
+                                        onTextChange={this.handleTextUpdate}
+                                    />
+                                    <TextInput
+                                        id="password"
+                                        label="Password"
+                                        onTextChange={this.handleTextUpdate}
+                                        type="password"
+                                    />
                                     <button
                                         className="button is-primary"
                                         type="submit"
