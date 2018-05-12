@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { withRouter } from 'react-router-dom'
 
-import TextInput from '../form/TextInput'
+import * as authActions from '../../actions/authActions'
+
 import Button from '../elements/Button'
+import CenteredContainer from '../layout/CenteredContainer'
+import TextInput from '../form/TextInput'
 
 class Register extends Component {
     constructor(props) {
@@ -21,9 +27,18 @@ class Register extends Component {
         this.handleTextUpdate = this.handleTextUpdate.bind(this)
     }
 
+    componentWillReceiveProps(nextProps) {
+        const { errors } = nextProps
+        if (errors) {
+            this.setState({ errors })
+        }
+    }
+
     onFormSubmit(e) {
         e.preventDefault()
+
         const { email, firstName, lastName, password, password2 } = this.state
+        const { authActions, history } = this.props
 
         const newUser = {
             email,
@@ -33,7 +48,7 @@ class Register extends Component {
             password2
         }
 
-        console.log(newUser)
+        authActions.registerUser(newUser, history)
     }
 
     handleTextUpdate(id, text) {
@@ -41,59 +56,62 @@ class Register extends Component {
     }
 
     render() {
-        const { email, firstName, lastName, password, password2 } = this.state
+        const {
+            email,
+            errors,
+            firstName,
+            lastName,
+            password,
+            password2
+        } = this.state
 
         return (
             <section className="section register">
-                <div className="container">
-                    <div className="columns">
-                        <div className="column is-4 is-offset-4">
-                            <h1 className="title is-1">Register</h1>
-                            <div className="box">
-                                <form onSubmit={this.onFormSubmit}>
-                                    <TextInput
-                                        hasError={false}
-                                        id="email"
-                                        label="Email"
-                                        onTextChange={this.handleTextUpdate}
-                                        value={email}
-                                    />
-                                    <TextInput
-                                        hasError={false}
-                                        id="firstName"
-                                        label="First Name"
-                                        onTextChange={this.handleTextUpdate}
-                                        value={firstName}
-                                    />
-                                    <TextInput
-                                        hasError={false}
-                                        id="lastName"
-                                        label="Last Name"
-                                        onTextChange={this.handleTextUpdate}
-                                        value={lastName}
-                                    />
-                                    <TextInput
-                                        hasError={false}
-                                        id="password"
-                                        label="Password"
-                                        onTextChange={this.handleTextUpdate}
-                                        type="password"
-                                        value={password}
-                                    />
-                                    <TextInput
-                                        hasError={false}
-                                        id="password2"
-                                        label="Confirm Password"
-                                        onTextChange={this.handleTextUpdate}
-                                        type="password"
-                                        value={password2}
-                                    />
-                                    <Button type="submit" />
-                                </form>
-                            </div>
-                        </div>
+                <CenteredContainer>
+                    <h1 className="title is-1">Register</h1>
+                    <div className="box">
+                        <form onSubmit={this.onFormSubmit}>
+                            <TextInput
+                                errorText={errors.firstName}
+                                id="firstName"
+                                label="First Name"
+                                onTextChange={this.handleTextUpdate}
+                                value={firstName}
+                            />
+                            <TextInput
+                                errorText={errors.lastName}
+                                id="lastName"
+                                label="Last Name"
+                                onTextChange={this.handleTextUpdate}
+                                value={lastName}
+                            />
+                            <TextInput
+                                errorText={errors.email}
+                                id="email"
+                                label="Email"
+                                onTextChange={this.handleTextUpdate}
+                                value={email}
+                            />
+                            <TextInput
+                                errorText={errors.password}
+                                id="password"
+                                label="Password"
+                                onTextChange={this.handleTextUpdate}
+                                type="password"
+                                value={password}
+                            />
+                            <TextInput
+                                errorText={errors.password2}
+                                id="password2"
+                                label="Confirm Password"
+                                onTextChange={this.handleTextUpdate}
+                                type="password"
+                                value={password2}
+                            />
+                            <Button type="submit" />
+                        </form>
                     </div>
-                </div>
+                </CenteredContainer>
             </section>
         )
     }
@@ -104,7 +122,26 @@ Register.defaultProps = {
 }
 
 Register.propTypes = {
-    // myProp: PropTypes.string.isRequired
+    auth: PropTypes.object,
+    authActions: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
 }
 
-export default Register
+function mapStateToProps(state) {
+    const { auth, errors } = state
+
+    return {
+        auth,
+        errors
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        authActions: bindActionCreators(authActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+    withRouter(Register)
+)

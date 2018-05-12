@@ -14,8 +14,22 @@ class TextInput extends Component {
     }
 
     render() {
-        const { hasError, id, label, placeholder, type, value } = this.props
-        const errorClass = hasError ? 'is-danger' : ''
+        const {
+            errorText,
+            helpText,
+            id,
+            label,
+            placeholder,
+            type,
+            value
+        } = this.props
+        const hasErrorClass = errorText ? 'is-danger' : ''
+
+        const hasHelpText = helpText ? <p className="help">{helpText}</p> : null
+        const hasErrorText = errorText ? (
+            <p className="help is-danger">{errorText}</p>
+        ) : null
+        const dynamicText = errorText ? hasErrorText : hasHelpText
 
         return (
             <div className="field">
@@ -24,14 +38,15 @@ class TextInput extends Component {
                 </label>
                 <div className="control">
                     <input
+                        className={`input ${hasErrorClass}`}
                         id={id}
-                        className={`input ${errorClass}`}
-                        type={type}
-                        placeholder={placeholder}
                         onChange={this.handleTextChange}
+                        placeholder={placeholder}
+                        type={type}
                         value={value}
                     />
                 </div>
+                {dynamicText}
             </div>
         )
     }

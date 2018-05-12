@@ -4,26 +4,41 @@ const isEmpty = require('./is-empty')
 module.exports = function validateRegisterInput(data) {
     let errors = {}
 
-    data.name = !isEmpty(data.name) ? data.name : ''
+    data.firstName = !isEmpty(data.firstName) ? data.firstName : ''
+    data.lastName = !isEmpty(data.lastName) ? data.lastName : ''
     data.email = !isEmpty(data.email) ? data.email : ''
     data.password = !isEmpty(data.password) ? data.password : ''
     data.password2 = !isEmpty(data.password2) ? data.password2 : ''
 
-    // Name Validation ====================
+    // First Name Validation ====================
     const minNameLength = 2
     const maxNameLength = 30
 
     if (
-        !Validator.isLength(data.name, {
+        !Validator.isLength(data.firstName, {
             min: minNameLength,
             max: maxNameLength
         })
     ) {
-        errors.name = `Name must be between ${minNameLength} and ${maxNameLength} characters.`
+        errors.firstName = `First name must be between ${minNameLength} and ${maxNameLength} characters.`
     }
 
-    if (Validator.isEmpty(data.name)) {
-        errors.name = 'Name field is required.'
+    if (Validator.isEmpty(data.firstName)) {
+        errors.firstName = 'First name field is required.'
+    }
+
+    // Last Name Validation ====================
+    if (
+        !Validator.isLength(data.lastName, {
+            min: minNameLength,
+            max: maxNameLength
+        })
+    ) {
+        errors.lastName = `Last name must be between ${minNameLength} and ${maxNameLength} characters.`
+    }
+
+    if (Validator.isEmpty(data.lastName)) {
+        errors.lastName = 'Last name field is required.'
     }
 
     // Email Validation ====================
@@ -36,10 +51,6 @@ module.exports = function validateRegisterInput(data) {
     }
 
     // Password Validation ====================
-    if (Validator.isEmpty(data.password)) {
-        errors.password = 'Password field is required.'
-    }
-
     const minPasswordLength = 6
     const maxPasswordLength = 30
 
@@ -49,16 +60,20 @@ module.exports = function validateRegisterInput(data) {
             max: maxPasswordLength
         })
     ) {
-        errors.password = `Email must be greater than ${minPasswordLength} characters, less than ${maxPasswordLength}.`
+        errors.password = `Password must be greater than ${minPasswordLength} characters, less than ${maxPasswordLength}.`
+    }
+
+    if (Validator.isEmpty(data.password)) {
+        errors.password = 'Password field is required.'
     }
 
     // Password2 Validation ====================
     if (Validator.isEmpty(data.password2)) {
-        errors.password = 'Confirm password field is required.'
+        errors.password2 = 'Confirm password field is required.'
     }
 
     if (!Validator.equals(data.password, data.password2)) {
-        errors.password = 'Password does not match Confirm Password.'
+        errors.password2 = 'Confirm password does not match Password.'
     }
 
     return {
