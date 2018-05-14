@@ -13,12 +13,4 @@ function Footer({}) {
     )
 }
 
-Footer.defaultProps = {
-    // myProp: 'String'
-}
-
-Footer.propTypes = {
-    // myProp: PropTypes.string.isRequired
-}
-
 export default Footer

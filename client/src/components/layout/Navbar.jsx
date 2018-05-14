@@ -1,6 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
 import { Link } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+
+import * as authActions from '../../actions/authActions'
+
+import Content from '../../constants/Content'
+import Url from '../../constants/Url'
 
 class Navbar extends Component {
     constructor() {
@@ -11,6 +20,7 @@ class Navbar extends Component {
         }
 
         this.toggleMenu = this.toggleMenu.bind(this)
+        this.logoutClick = this.logoutClick.bind(this)
     }
 
     toggleMenu() {
@@ -18,9 +28,46 @@ class Navbar extends Component {
         this.setState({ isOpen: !isOpen })
     }
 
+    logoutClick(e) {
+        e.preventDefault()
+        const { authActions, history } = this.props
+        authActions.logoutUser()
+
+        history.push(Url.HOME)
+    }
+
     render() {
-        const { children } = this.props
+        const { auth, children } = this.props
+        const { isAuthenticated, user } = auth
+
         const { isOpen } = this.state
+
+        const authLinks = (
+            <div className="navbar-end">
+                <a href="" onClick={this.logoutClick} className="navbar-item">
+                    <img
+                        src={user.avatar}
+                        alt={`${user.name} - Gravatar Photo`}
+                        title={`${user.name} - Gravatar Photo`}
+                    />
+                    {'\xa0\xa0'}
+                    {Content.LOGOUT}
+                </a>
+            </div>
+        )
+
+        const guestLinks = (
+            <div className="navbar-end">
+                <Link to={Url.REGISTER} className="navbar-item">
+                    {Content.REGISTER}
+                </Link>
+                <Link to={Url.LOGIN} className="navbar-item">
+                    {Content.LOGIN}
+                </Link>
+            </div>
+        )
+
+        const dynamicLinks = isAuthenticated ? authLinks : guestLinks
 
         return (
             <nav
@@ -30,7 +77,7 @@ class Navbar extends Component {
             >
                 <div className="navbar-brand">
                     <Link className="navbar-item" to="/">
-                        DevConnector
+                        {Content.SITE_TITLE}
                     </Link>
                     <a
                         role="button"
@@ -47,19 +94,30 @@ class Navbar extends Component {
 
                 <div className={`navbar-menu ${isOpen ? 'is-active' : ''}`}>
                     <div className="navbar-start" />
-                    <div className="navbar-end">{children}</div>
+                    {dynamicLinks}
                 </div>
             </nav>
         )
     }
 }
 
-Navbar.defaultProps = {
-    // myProp: 'String'
-}
-
 Navbar.propTypes = {
-    // myProp: PropTypes.string.isRequired
+    auth: PropTypes.object.isRequired,
+    authActions: PropTypes.object.isRequired
 }
 
-export default Navbar
+function mapStateToProps(state) {
+    const { auth } = state
+
+    return {
+        auth
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        authActions: bindActionCreators(authActions, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navbar))

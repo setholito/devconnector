@@ -3,6 +3,10 @@ import jwtDecode from 'jwt-decode'
 import setAuthToken from '../utils/setAuthToken'
 import actionTypes from './actionTypes'
 
+export function setCurrentUser(decodedValue) {
+    return { type: actionTypes.SET_CURRENT_USER, payload: decodedValue }
+}
+
 // REGISTER ==========
 export function registerUser(userData, history) {
     return function(dispatch) {
@@ -48,6 +52,14 @@ export function loginUser(userData, history) {
     }
 }
 
-export function setCurrentUser(decodedValue) {
-    return { type: actionTypes.SET_CURRENT_USER, payload: decodedValue }
+// LOG OUT ==========
+export function logoutUser() {
+    return function(dispatch) {
+        // Remove token from localStorage
+        localStorage.removeItem('jwtToken')
+        // Remove auth header for future requests
+        setAuthToken(false)
+        // Set current user to empty object to set isAuthenticated to false
+        dispatch(setCurrentUser({}))
+    }
 }

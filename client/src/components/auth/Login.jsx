@@ -5,7 +5,11 @@ import { bindActionCreators } from 'redux'
 import * as authActions from '../../actions/authActions'
 
 import TextInput from '../form/TextInput'
+import Button from '../elements/Button'
 import CenteredContainer from '../layout/CenteredContainer'
+
+import Content from '../../constants/Content'
+import Url from '../../constants/Url'
 
 class Login extends Component {
     constructor(props) {
@@ -21,12 +25,21 @@ class Login extends Component {
         this.handleTextUpdate = this.handleTextUpdate.bind(this)
     }
 
+    componentDidMount() {
+        const { history, auth } = this.props
+        const { isAuthenticated } = auth
+
+        if (isAuthenticated) {
+            history.push(Url.DASHBOARD)
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
         const { auth, errors } = nextProps
         const { history } = this.props
 
         if (auth.isAuthenticated) {
-            history.push('/dashboard')
+            history.push(Url.DASHBOARD)
         }
 
         if (errors) {
@@ -56,7 +69,7 @@ class Login extends Component {
         return (
             <section className="section login">
                 <CenteredContainer>
-                    <h1 className="title is-1">Login</h1>
+                    <h1 className="title is-1">{Content.LOGIN}</h1>
                     <div className="box">
                         <form onSubmit={this.handleSubmit}>
                             <TextInput
@@ -71,21 +84,16 @@ class Login extends Component {
                                 id="password"
                                 label="Password"
                                 onTextChange={this.handleTextUpdate}
+                                type="password"
                                 value={password}
                             />
-                            <button className="button is-primary" type="submit">
-                                Submit
-                            </button>
+                            <Button type="submit" />
                         </form>
                     </div>
                 </CenteredContainer>
             </section>
         )
     }
-}
-
-Login.defaultProps = {
-    // myProp: 'String'
 }
 
 Login.propTypes = {

@@ -10,6 +10,8 @@ import Button from '../elements/Button'
 import CenteredContainer from '../layout/CenteredContainer'
 import TextInput from '../form/TextInput'
 
+import Content from '../../constants/Content'
+
 class Register extends Component {
     constructor(props) {
         super(props)
@@ -25,6 +27,15 @@ class Register extends Component {
 
         this.onFormSubmit = this.onFormSubmit.bind(this)
         this.handleTextUpdate = this.handleTextUpdate.bind(this)
+    }
+
+    componentDidMount() {
+        const { history, auth } = this.props
+        const { isAuthenticated } = auth
+
+        if (isAuthenticated) {
+            history.push('/dashboard')
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -68,7 +79,7 @@ class Register extends Component {
         return (
             <section className="section register">
                 <CenteredContainer>
-                    <h1 className="title is-1">Register</h1>
+                    <h1 className="title is-1">{Content.REGISTER}</h1>
                     <div className="box">
                         <form onSubmit={this.onFormSubmit}>
                             <TextInput
@@ -115,10 +126,6 @@ class Register extends Component {
             </section>
         )
     }
-}
-
-Register.defaultProps = {
-    // myProp: 'String'
 }
 
 Register.propTypes = {
