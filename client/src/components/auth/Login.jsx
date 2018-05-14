@@ -77,6 +77,7 @@ class Login extends Component {
                                 id="email"
                                 label="Email"
                                 onTextChange={this.handleTextUpdate}
+                                type="email"
                                 value={email}
                             />
                             <TextInput

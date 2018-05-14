@@ -5,5 +5,8 @@ export default {
     // Auth ==========
     LOGIN: 'Login',
     LOGOUT: 'Logout',
-    REGISTER: 'Register'
+    REGISTER: 'Register',
+
+    // Dashboard ==========
+    DASHBOARD: 'Dashboard'
 }

@@ -5,12 +5,14 @@ import store from './store'
 import jwtDecode from 'jwt-decode'
 import setAuthToken from './utils/setAuthToken'
 import * as authActions from './actions/authActions'
+import * as profileActions from './actions/profileActions'
 
 import Footer from './components/layout/Footer'
 import Navbar from './components/layout/Navbar'
 import Landing from './components/layout/Landing'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
+import Dashboard from './components/dashboard/Dashboard'
 
 import './app.css'
 
@@ -30,6 +32,9 @@ if (localStorage.jwtToken) {
         // Logout user
         store.dispatch(authActions.logoutUser())
 
+        // Clear out current profile
+        store.dispatch(profileActions.clearCurrentProfile())
+
         // Redirect to loginUser
         window.location.href = '/login'
     }
@@ -44,6 +49,11 @@ class App extends Component {
                         <Navbar />
                         <main role="main">
                             <Route exact path="/" component={Landing} />
+                            <Route
+                                exact
+                                path="/dashboard"
+                                component={Dashboard}
+                            />
                             <Route exact path="/login" component={Login} />
                             <Route
                                 component={Register}

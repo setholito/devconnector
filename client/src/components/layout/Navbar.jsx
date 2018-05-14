@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import * as authActions from '../../actions/authActions'
+import * as profileActions from '../../actions/profileActions'
 
 import Content from '../../constants/Content'
 import Url from '../../constants/Url'
@@ -30,8 +31,9 @@ class Navbar extends Component {
 
     logoutClick(e) {
         e.preventDefault()
-        const { authActions, history } = this.props
+        const { authActions, history, profileActions } = this.props
         authActions.logoutUser()
+        profileActions.clearCurrentProfile()
 
         history.push(Url.HOME)
     }
@@ -116,7 +118,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        authActions: bindActionCreators(authActions, dispatch)
+        authActions: bindActionCreators(authActions, dispatch),
+        profileActions: bindActionCreators(profileActions, dispatch)
     }
 }
 

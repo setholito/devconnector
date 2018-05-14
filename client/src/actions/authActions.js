@@ -1,10 +1,10 @@
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import setAuthToken from '../utils/setAuthToken'
-import actionTypes from './actionTypes'
+import { GET_ERRORS, SET_CURRENT_USER } from './actionTypes'
 
 export function setCurrentUser(decodedValue) {
-    return { type: actionTypes.SET_CURRENT_USER, payload: decodedValue }
+    return { type: SET_CURRENT_USER, payload: decodedValue }
 }
 
 // REGISTER ==========
@@ -15,7 +15,7 @@ export function registerUser(userData, history) {
             .then(res => history.push('/login'))
             .catch(err =>
                 dispatch({
-                    type: actionTypes.GET_ERRORS,
+                    type: GET_ERRORS,
                     payload: err.response.data
                 })
             )
@@ -45,7 +45,7 @@ export function loginUser(userData, history) {
             })
             .catch(err =>
                 dispatch({
-                    type: actionTypes.GET_ERRORS,
+                    type: GET_ERRORS,
                     payload: err.response.data
                 })
             )
