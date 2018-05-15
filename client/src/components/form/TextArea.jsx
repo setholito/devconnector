@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-class TextInput extends Component {
+class TextArea extends Component {
     constructor() {
         super()
 
@@ -21,7 +21,6 @@ class TextInput extends Component {
             label,
             name,
             placeholder,
-            type,
             value
         } = this.props
         const hasErrorClass = errorText ? 'is-danger' : ''
@@ -38,13 +37,12 @@ class TextInput extends Component {
                     {label}
                 </label>
                 <div className="control">
-                    <input
-                        className={`input ${hasErrorClass}`}
+                    <textarea
+                        className={`textarea ${hasErrorClass}`}
                         id={id}
                         name={name}
                         onChange={this.handleTextChange}
                         placeholder={placeholder}
-                        type={type}
                         value={value}
                     />
                 </div>
@@ -54,14 +52,9 @@ class TextInput extends Component {
     }
 }
 
-TextInput.defaultProps = {
-    type: 'text'
-}
-
-TextInput.propTypes = {
+TextArea.propTypes = {
     id: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
-    type: PropTypes.string
+    placeholder: PropTypes.string
 }
 
-export default TextInput
+export default TextArea

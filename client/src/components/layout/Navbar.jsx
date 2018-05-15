@@ -32,14 +32,15 @@ class Navbar extends Component {
     logoutClick(e) {
         e.preventDefault()
         const { authActions, history, profileActions } = this.props
+
         authActions.logoutUser()
         profileActions.clearCurrentProfile()
 
-        history.push(Url.HOME)
+        history.push(Url.LOGIN)
     }
 
     render() {
-        const { auth, children } = this.props
+        const { auth } = this.props
         const { isAuthenticated, user } = auth
 
         const { isOpen } = this.state
@@ -49,8 +50,8 @@ class Navbar extends Component {
                 <a href="" onClick={this.logoutClick} className="navbar-item">
                     <img
                         src={user.avatar}
-                        alt={`${user.name} - Gravatar Photo`}
-                        title={`${user.name} - Gravatar Photo`}
+                        alt={`${user.name} - Gravatar`}
+                        title={`${user.name} - Gravatar`}
                     />
                     {'\xa0\xa0'}
                     {Content.LOGOUT}
@@ -74,7 +75,6 @@ class Navbar extends Component {
         return (
             <nav
                 className="navbar is-fixed-top is-info"
-                role="navigation"
                 aria-label="main navigation"
             >
                 <div className="navbar-brand">

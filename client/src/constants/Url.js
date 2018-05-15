@@ -1,8 +1,9 @@
-const basePath = ''
+const basePath = '/'
 
 export default {
-    DASHBOARD: `${basePath}/dashboard`,
+    CREATE_PROFILE: '/create-profile',
+    DASHBOARD: '/dashboard',
     HOME: `${basePath}`,
-    LOGIN: `${basePath}/login`,
-    REGISTER: `${basePath}/register`
+    LOGIN: '/login',
+    REGISTER: '/register'
 }

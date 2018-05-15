@@ -1,7 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-function Footer({}) {
+function Footer() {
     return (
         <footer className="footer">
             <div className="container">

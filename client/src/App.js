@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
 import jwtDecode from 'jwt-decode'
@@ -7,12 +7,16 @@ import setAuthToken from './utils/setAuthToken'
 import * as authActions from './actions/authActions'
 import * as profileActions from './actions/profileActions'
 
-import Footer from './components/layout/Footer'
-import Navbar from './components/layout/Navbar'
-import Landing from './components/layout/Landing'
-import Register from './components/auth/Register'
-import Login from './components/auth/Login'
+import PrivateRoute from './components/common/PrivateRoute'
+import Url from './constants/Url'
+
+import CreateProfile from './components/create-profile/CreateProfile'
 import Dashboard from './components/dashboard/Dashboard'
+import Footer from './components/layout/Footer'
+import Landing from './components/layout/Landing'
+import Login from './components/auth/Login'
+import Navbar from './components/layout/Navbar'
+import Register from './components/auth/Register'
 
 import './app.css'
 
@@ -48,18 +52,25 @@ class App extends Component {
                     <div className="app">
                         <Navbar />
                         <main role="main">
-                            <Route exact path="/" component={Landing} />
-                            <Route
-                                exact
-                                path="/dashboard"
-                                component={Dashboard}
-                            />
-                            <Route exact path="/login" component={Login} />
+                            <Route exact path={Url.HOME} component={Landing} />
+                            <Route exact path={Url.LOGIN} component={Login} />
                             <Route
                                 component={Register}
                                 exact
-                                path="/register"
+                                path={Url.REGISTER}
                             />
+                            <Switch>
+                                <PrivateRoute
+                                    exact
+                                    path={Url.CREATE_PROFILE}
+                                    component={CreateProfile}
+                                />
+                                <PrivateRoute
+                                    exact
+                                    path={Url.DASHBOARD}
+                                    component={Dashboard}
+                                />
+                            </Switch>
                         </main>
                         <Footer />
                     </div>
