@@ -77,6 +77,7 @@ class Login extends Component {
                                 label="Email"
                                 name="email"
                                 onTextChange={this.handleTextUpdate}
+                                required
                                 type="email"
                                 value={email}
                             />
@@ -85,10 +86,11 @@ class Login extends Component {
                                 label="Password"
                                 name="password"
                                 onTextChange={this.handleTextUpdate}
+                                required
                                 type="password"
                                 value={password}
                             />
-                            <Button type="submit" />
+                            <Button className="is-success" type="submit" />
                         </form>
                     </div>
                 </CenteredContainer>

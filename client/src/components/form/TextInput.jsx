@@ -27,8 +27,8 @@ class TextInput extends Component {
             type,
             value
         } = this.props
-        const hasErrorClass = errorText ? 'is-danger' : ''
 
+        const hasErrorClass = errorText ? 'is-danger' : ''
         const hasHelpText = helpText ? <p className="help">{helpText}</p> : null
         const hasErrorText = errorText ? (
             <p className="help is-danger">{errorText}</p>

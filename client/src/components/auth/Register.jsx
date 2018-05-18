@@ -87,6 +87,7 @@ class Register extends Component {
                                 label="First Name"
                                 name="firstName"
                                 onTextChange={this.handleTextUpdate}
+                                required
                                 value={firstName}
                             />
                             <TextInput
@@ -94,6 +95,7 @@ class Register extends Component {
                                 label="Last Name"
                                 name="lastName"
                                 onTextChange={this.handleTextUpdate}
+                                required
                                 value={lastName}
                             />
                             <TextInput
@@ -101,6 +103,7 @@ class Register extends Component {
                                 label="Email"
                                 name="email"
                                 onTextChange={this.handleTextUpdate}
+                                required
                                 type="email"
                                 value={email}
                             />
@@ -109,6 +112,7 @@ class Register extends Component {
                                 label="Password"
                                 name="password"
                                 onTextChange={this.handleTextUpdate}
+                                required
                                 type="password"
                                 value={password}
                             />
@@ -117,10 +121,11 @@ class Register extends Component {
                                 label="Confirm Password"
                                 name="password2"
                                 onTextChange={this.handleTextUpdate}
+                                required
                                 type="password"
                                 value={password2}
                             />
-                            <Button type="submit" />
+                            <Button className="is-success" type="submit" />
                         </form>
                     </div>
                 </CenteredContainer>

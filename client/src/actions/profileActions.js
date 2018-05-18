@@ -3,7 +3,8 @@ import {
     CLEAR_CURRENT_PROFILE,
     GET_ERRORS,
     GET_PROFILE,
-    PROFILE_LOADING
+    PROFILE_LOADING,
+    SET_CURRENT_USER
 } from './actionTypes'
 import Url from '../constants/Url'
 
@@ -16,7 +17,9 @@ export function getCurrentProfile() {
         dispatch(setProfileLoading())
         axios
             .get('/api/profile')
-            .then(res => dispatch({ type: GET_PROFILE, payload: res.data }))
+            .then(res => {
+                dispatch({ type: GET_PROFILE, payload: res.data })
+            })
             .catch(err => dispatch({ type: GET_PROFILE, payload: {} }))
     }
 }
@@ -30,6 +33,17 @@ export function createProfile(profileData, history) {
         axios
             .post('/api/profile', profileData)
             .then(res => history.push(Url.DASHBOARD))
+            .catch(err =>
+                dispatch({ type: GET_ERRORS, payload: err.response.data })
+            )
+    }
+}
+
+export function deleteProfileAndAccount(profileData, history) {
+    return function(dispatch) {
+        axios
+            .delete('/api/profile')
+            .then(res => dispatch({ type: SET_CURRENT_USER, payload: {} }))
             .catch(err =>
                 dispatch({ type: GET_ERRORS, payload: err.response.data })
             )

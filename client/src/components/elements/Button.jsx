@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function Button({ onClick, text, type }) {
+function Button({ className, onClick, text, type }) {
     return (
-        <button className="button is-primary" type={type} onClick={onClick}>
+        <button className={`button ${className}`} type={type} onClick={onClick}>
             {text}
         </button>
     )

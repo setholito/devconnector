@@ -15,24 +15,46 @@ class Select extends Component {
     }
 
     render() {
-        const { id, label, name, options, required } = this.props
+        const {
+            errorText,
+            helpText,
+            id,
+            label,
+            name,
+            optional,
+            options,
+            required
+        } = this.props
+
+        const hasErrorClass = errorText ? 'is-danger' : ''
+        const hasHelpText = helpText ? <p className="help">{helpText}</p> : null
+        const hasErrorText = errorText ? (
+            <p className="help is-danger">{errorText}</p>
+        ) : null
+
+        const dynamicText = errorText ? hasErrorText : hasHelpText
 
         const mappedOptions = options.map(item => (
             <option key={item.label} value={item.value.toLowerCase()}>
                 {item.label}
             </option>
         ))
+
         const showRequired = required ? (
             <span className="required">{Content.REQUIRED_LABEL}</span>
+        ) : null
+
+        const showOptional = optional ? (
+            <span className="optional">{Content.OPTIONAL_LABEL}</span>
         ) : null
 
         return (
             <div className="field">
                 <label className="label" htmlFor={id}>
-                    {label} {showRequired}
+                    {label} {showRequired || showOptional}
                 </label>
                 <div className="control">
-                    <div className="select">
+                    <div className={`select ${hasErrorClass}`}>
                         <select
                             id={id}
                             name={name}
@@ -42,6 +64,7 @@ class Select extends Component {
                         </select>
                     </div>
                 </div>
+                {dynamicText}
             </div>
         )
     }
