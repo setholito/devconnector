@@ -84,38 +84,38 @@ class Register extends Component {
                         <form onSubmit={this.onFormSubmit}>
                             <TextInput
                                 errorText={errors.firstName}
-                                id="firstName"
                                 label="First Name"
+                                name="firstName"
                                 onTextChange={this.handleTextUpdate}
                                 value={firstName}
                             />
                             <TextInput
                                 errorText={errors.lastName}
-                                id="lastName"
                                 label="Last Name"
+                                name="lastName"
                                 onTextChange={this.handleTextUpdate}
                                 value={lastName}
                             />
                             <TextInput
                                 errorText={errors.email}
-                                id="email"
                                 label="Email"
+                                name="email"
                                 onTextChange={this.handleTextUpdate}
                                 type="email"
                                 value={email}
                             />
                             <TextInput
                                 errorText={errors.password}
-                                id="password"
                                 label="Password"
+                                name="password"
                                 onTextChange={this.handleTextUpdate}
                                 type="password"
                                 value={password}
                             />
                             <TextInput
                                 errorText={errors.password2}
-                                id="password2"
                                 label="Confirm Password"
+                                name="password2"
                                 onTextChange={this.handleTextUpdate}
                                 type="password"
                                 value={password2}

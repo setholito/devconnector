@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Content from '../../constants/Content'
 
 class Select extends Component {
     constructor() {
@@ -9,27 +10,34 @@ class Select extends Component {
     }
 
     handleSelectChange(e) {
-        const { id, value } = e.target
-        this.props.onTextChange(id, value)
+        const { name, value } = e.target
+        this.props.onTextChange(name, value)
     }
 
     render() {
-        const { id, label, options } = this.props
+        const { id, label, name, options, required } = this.props
 
         const mappedOptions = options.map(item => (
             <option key={item.label} value={item.value.toLowerCase()}>
                 {item.label}
             </option>
         ))
+        const showRequired = required ? (
+            <span className="required">{Content.REQUIRED_LABEL}</span>
+        ) : null
 
         return (
-            <div class="field">
-                <label class="label" htmlFor={id}>
-                    {label}
+            <div className="field">
+                <label className="label" htmlFor={id}>
+                    {label} {showRequired}
                 </label>
-                <div class="control">
-                    <div class="select">
-                        <select id={id} onChange={this.handleSelectChange}>
+                <div className="control">
+                    <div className="select">
+                        <select
+                            id={id}
+                            name={name}
+                            onChange={this.handleSelectChange}
+                        >
                             {mappedOptions}
                         </select>
                     </div>
@@ -40,8 +48,9 @@ class Select extends Component {
 }
 
 Select.propTypes = {
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string,
     label: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     options: PropTypes.array.isRequired
 }
 

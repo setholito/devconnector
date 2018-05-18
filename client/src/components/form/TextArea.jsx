@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Content from '../../constants/Content'
 
 class TextArea extends Component {
     constructor() {
@@ -9,8 +10,8 @@ class TextArea extends Component {
     }
 
     handleTextChange(e) {
-        const { id, value } = e.target
-        this.props.onTextChange(id, value)
+        const { name, value } = e.target
+        this.props.onTextChange(name, value)
     }
 
     render() {
@@ -21,6 +22,7 @@ class TextArea extends Component {
             label,
             name,
             placeholder,
+            required,
             value
         } = this.props
         const hasErrorClass = errorText ? 'is-danger' : ''
@@ -30,11 +32,14 @@ class TextArea extends Component {
             <p className="help is-danger">{errorText}</p>
         ) : null
         const dynamicText = errorText ? hasErrorText : hasHelpText
+        const showRequired = required ? (
+            <span className="required">{Content.REQUIRED_LABEL}</span>
+        ) : null
 
         return (
             <div className="field">
                 <label className="label" htmlFor={id}>
-                    {label}
+                    {label} {showRequired}
                 </label>
                 <div className="control">
                     <textarea
@@ -53,7 +58,8 @@ class TextArea extends Component {
 }
 
 TextArea.propTypes = {
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string,
+    name: PropTypes.string.isRequired,
     placeholder: PropTypes.string
 }
 

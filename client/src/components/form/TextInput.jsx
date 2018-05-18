@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Content from '../../constants/Content'
 
 class TextInput extends Component {
     constructor() {
@@ -9,8 +10,8 @@ class TextInput extends Component {
     }
 
     handleTextChange(e) {
-        const { id, value } = e.target
-        this.props.onTextChange(id, value)
+        const { name, value } = e.target
+        this.props.onTextChange(name, value)
     }
 
     render() {
@@ -20,7 +21,9 @@ class TextInput extends Component {
             id,
             label,
             name,
+            optional,
             placeholder,
+            required,
             type,
             value
         } = this.props
@@ -30,12 +33,20 @@ class TextInput extends Component {
         const hasErrorText = errorText ? (
             <p className="help is-danger">{errorText}</p>
         ) : null
+
         const dynamicText = errorText ? hasErrorText : hasHelpText
+
+        const showRequired = required ? (
+            <span className="required">{Content.REQUIRED_LABEL}</span>
+        ) : null
+        const showOptional = optional ? (
+            <span className="optional">{Content.OPTIONAL_LABEL}</span>
+        ) : null
 
         return (
             <div className="field">
                 <label className="label" htmlFor={id}>
-                    {label}
+                    {label} {showRequired || showOptional}
                 </label>
                 <div className="control">
                     <input
@@ -59,7 +70,8 @@ TextInput.defaultProps = {
 }
 
 TextInput.propTypes = {
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string,
+    name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     type: PropTypes.string
 }

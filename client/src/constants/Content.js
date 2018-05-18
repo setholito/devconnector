@@ -11,5 +11,9 @@ export default {
     CREATE_PROFILE_TITLE: 'Create Profile',
 
     // Dashboard ==========
-    DASHBOARD: 'Dashboard'
+    DASHBOARD: 'Dashboard',
+
+    // Inputs ==========
+    REQUIRED_LABEL: '- Required',
+    OPTIONAL_LABEL: '- Optional'
 }

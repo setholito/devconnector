@@ -74,16 +74,16 @@ class Login extends Component {
                         <form onSubmit={this.handleSubmit}>
                             <TextInput
                                 errorText={errors.email}
-                                id="email"
                                 label="Email"
+                                name="email"
                                 onTextChange={this.handleTextUpdate}
                                 type="email"
                                 value={email}
                             />
                             <TextInput
                                 errorText={errors.password}
-                                id="password"
                                 label="Password"
+                                name="password"
                                 onTextChange={this.handleTextUpdate}
                                 type="password"
                                 value={password}

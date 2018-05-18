@@ -1,5 +1,11 @@
 $spinner-size: 60px;
 
+.required,
+.optional {
+    font-weight: normal;
+    color: #808080;
+}
+
 .spinner {
     border: 8px solid #f3f3f3; /* Light grey */
     border-top: 8px solid #3498db; /* Blue */
