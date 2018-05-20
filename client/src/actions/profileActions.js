@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {
     CLEAR_CURRENT_PROFILE,
+    CLEAR_ERRORS,
     GET_ERRORS,
     GET_PROFILE,
     PROFILE_LOADING,
@@ -32,7 +33,24 @@ export function createProfile(profileData, history) {
     return function(dispatch) {
         axios
             .post('/api/profile', profileData)
-            .then(res => history.push(Url.DASHBOARD))
+            .then(res => {
+                dispatch({ type: CLEAR_ERRORS })
+                history.push(Url.DASHBOARD)
+            })
+            .catch(err =>
+                dispatch({ type: GET_ERRORS, payload: err.response.data })
+            )
+    }
+}
+
+export function updateProfile(profileData, history) {
+    return function(dispatch) {
+        axios
+            .post('/api/profile', profileData)
+            .then(res => {
+                dispatch({ type: CLEAR_ERRORS })
+                history.push(Url.DASHBOARD)
+            })
             .catch(err =>
                 dispatch({ type: GET_ERRORS, payload: err.response.data })
             )

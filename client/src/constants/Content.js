@@ -9,6 +9,7 @@ export default {
 
     // Create Profile ==========
     CREATE_PROFILE_TITLE: 'Create Profile',
+    EDIT_PROFILE_TITLE: 'Edit Profile',
 
     // Dashboard ==========
     DASHBOARD: 'Dashboard',

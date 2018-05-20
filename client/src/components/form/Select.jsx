@@ -23,7 +23,8 @@ class Select extends Component {
             name,
             optional,
             options,
-            required
+            required,
+            value
         } = this.props
 
         const hasErrorClass = errorText ? 'is-danger' : ''
@@ -59,6 +60,7 @@ class Select extends Component {
                             id={id}
                             name={name}
                             onChange={this.handleSelectChange}
+                            value={value}
                         >
                             {mappedOptions}
                         </select>

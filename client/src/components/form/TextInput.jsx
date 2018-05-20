@@ -66,14 +66,16 @@ class TextInput extends Component {
 }
 
 TextInput.defaultProps = {
-    type: 'text'
+    type: 'text',
+    value: ''
 }
 
 TextInput.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
-    type: PropTypes.string
+    type: PropTypes.string,
+    value: PropTypes.string
 }
 
 export default TextInput

@@ -45,6 +45,14 @@ class Navbar extends Component {
 
         const { isOpen } = this.state
 
+        const startSectionLinks = (
+            <div className="navbar-start">
+                <Link to={Url.DASHBOARD} className="navbar-item">
+                    {Content.DASHBOARD}
+                </Link>
+            </div>
+        )
+
         const authLinks = (
             <div className="navbar-end">
                 <a href="" onClick={this.logoutClick} className="navbar-item">
@@ -70,7 +78,8 @@ class Navbar extends Component {
             </div>
         )
 
-        const dynamicLinks = isAuthenticated ? authLinks : guestLinks
+        const dynamicLinksStart = isAuthenticated ? startSectionLinks : null
+        const dynamicLinksEnd = isAuthenticated ? authLinks : guestLinks
 
         return (
             <nav
@@ -95,8 +104,8 @@ class Navbar extends Component {
                 </div>
 
                 <div className={`navbar-menu ${isOpen ? 'is-active' : ''}`}>
-                    <div className="navbar-start" />
-                    {dynamicLinks}
+                    {dynamicLinksStart}
+                    {dynamicLinksEnd}
                 </div>
             </nav>
         )
