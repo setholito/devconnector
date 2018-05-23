@@ -1,33 +1,36 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function Card({ children, title }) {
+function Card({ children, className, title }) {
+    const filterCardLinks = React.Children.toArray(children).filter(
+        item => item.props['card-link'] === 'true'
+    )
+
+    const filterChildren = React.Children.toArray(children).filter(
+        item => item.props['card-link'] === undefined
+    )
+
     return (
-        <div className="card">
+        <div className={`card ${className}`}>
             <header className="card-header">
                 <p className="card-header-title">{title}</p>
             </header>
             <div className="card-content">
-                <div className="content">{children}</div>
+                <div className="content">{filterChildren}</div>
             </div>
-            <footer className="card-footer">
-                <a href="#" className="card-footer-item">
-                    Update
-                </a>
-                <a href="#" className="card-footer-item">
-                    Share
-                </a>
-            </footer>
+            <footer className="card-footer">{filterCardLinks}</footer>
         </div>
     )
 }
 
 Card.defaultProps = {
-    // myProp: 'String'
+    className: ''
 }
 
 Card.propTypes = {
-    // myProp: PropTypes.string.isRequired
+    cardLinks: PropTypes.array,
+    className: PropTypes.string,
+    title: PropTypes.string.isRequired
 }
 
 export default Card

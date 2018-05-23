@@ -11,20 +11,21 @@ import * as profileActions from './actions/profileActions'
 import PrivateRoute from './components/common/PrivateRoute'
 import Url from './constants/Url'
 
-import Login from './components/auth/Login'
+import Login from './views/auth/Login'
 
-import CreateProfile from './components/profile/CreateProfile'
-import EditProfile from './components/profile/EditProfile'
-import DisplayProfile from './components/profile/DisplayProfile'
+import CreateProfile from './views/profile/CreateProfile'
+import EditProfile from './views/profile/EditProfile'
+import DisplayProfile from './views/profile/DisplayProfile'
 
-import Dashboard from './components/dashboard/Dashboard'
-import AddEducation from './components/education/AddEducation'
-import AddExperience from './components/experience/AddExperience'
+import Dashboard from './views/dashboard/Dashboard'
+import AddEducation from './views/education/AddEducation'
+import AddExperience from './views/experience/AddExperience'
 
 import Footer from './components/layout/Footer'
-import Landing from './components/layout/Landing'
+import Landing from './views/landing/Landing'
 import Navbar from './components/layout/Navbar'
-import Register from './components/auth/Register'
+
+import Register from './views/auth/Register'
 
 import './app.css'
 

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import Content from '../../constants/Content'
 import Url from '../../constants/Url'
 
-import Hero from './Hero'
+import Hero from '../../components/layout/Hero'
 
 class SplashPage extends Component {
     componentDidMount() {

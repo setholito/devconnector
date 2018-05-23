@@ -17,6 +17,7 @@ class TextInput extends Component {
     render() {
         const {
             errorText,
+            disabled,
             helpText,
             id,
             label,
@@ -51,6 +52,7 @@ class TextInput extends Component {
                 <div className="control">
                     <input
                         className={`input ${hasErrorClass}`}
+                        disabled={disabled}
                         id={id}
                         name={name}
                         onChange={this.handleTextChange}

@@ -1,20 +1,35 @@
 export default {
-    // Site ==========
+    // SITE ==========
     SITE_TITLE: 'DevConnector',
 
-    // Auth ==========
+    // AUTH ==========
+    LOGIN_HEADING: 'Login',
+    LOGOUT_HEADING: 'Logout',
+    REGISTER_HEADING: 'Register',
+
+    // NAVBAR ==========
     LOGIN: 'Login',
     LOGOUT: 'Logout',
     REGISTER: 'Register',
 
-    // Create Profile ==========
-    CREATE_PROFILE_TITLE: 'Create Profile',
-    EDIT_PROFILE_TITLE: 'Edit Profile',
+    // CREATE PROFILE ==========
+    CREATE_PROFILE_HEADING: 'Create Profile',
 
-    // Dashboard ==========
-    DASHBOARD: 'Dashboard',
+    // EDIT PROFILE ==========
+    EDIT_PROFILE_HEADING: 'Edit Profile',
 
-    // Inputs ==========
+    // DASHBOARD ==========
+    DASHBOARD_HEADING: 'Dashboard',
+    NO_PROFILE: 'You have not created a profile.',
+    CREATE_PROFILE_CTA: 'Create Profile',
+
+    // INPUTS ==========
     REQUIRED_LABEL: '- Required',
-    OPTIONAL_LABEL: '- Optional'
+    OPTIONAL_LABEL: '- Optional',
+
+    // EXPERIENCE ==========
+    ADD_EXPERIENCE_HEADING: 'Add Experience',
+
+    // EDUCATION ==========
+    ADD_EDUCATION_HEADING: 'Add Education'
 }

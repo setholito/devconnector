@@ -12,4 +12,7 @@ export const PROFILE_LOADING = 'PROFILE_LOADING'
 export const PROFILE_NOT_FOUND = 'PROFILE_NOT_FOUND'
 export const CLEAR_CURRENT_PROFILE = 'CLEAR_CURRENT_PROFILE'
 
+// Experience ==========
+export const ADD_EXPERIENCE = 'ADD_EXPERIENCE'
+
 export default {}

@@ -18,3 +18,29 @@
     transform: rotate(0deg); }
   100% {
     transform: rotate(360deg); } }
+
+.go-back-link {
+  margin-bottom: 0.5em; }
+
+ul.unstyled {
+  list-style: none;
+  margin-top: 0;
+  margin-left: 0; }
+  ul.unstyled.with-lines li {
+    padding: 1em 0;
+    border-bottom: 1px #cccccc solid; }
+    ul.unstyled.with-lines li:first-child {
+      padding-top: 0; }
+    ul.unstyled.with-lines li:last-child {
+      border-bottom: transparent; }
+
+.spacer-bottom {
+  margin-bottom: 1em; }
+
+h1.faded,
+h2.faded,
+h3.faded,
+h4.faded,
+h5.faded,
+h6.faded {
+  color: #ccc; }

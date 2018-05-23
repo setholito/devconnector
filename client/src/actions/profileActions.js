@@ -13,6 +13,8 @@ export function setProfileLoading() {
     return { type: PROFILE_LOADING }
 }
 
+// PROFILE ================================
+
 export function getCurrentProfile() {
     return function(dispatch) {
         dispatch(setProfileLoading())
@@ -56,6 +58,58 @@ export function updateProfile(profileData, history) {
             )
     }
 }
+
+// EDUCATION ================================
+
+export function addEducation(eduData, history) {
+    return function(dispatch) {
+        axios
+            .post('/api/profile/education', eduData)
+            .then(res => {
+                history.push(Url.DASHBOARD)
+            })
+            .catch(err =>
+                dispatch({ type: GET_ERRORS, payload: err.response.data })
+            )
+    }
+}
+
+export function deleteEducation(id) {
+    return function(dispatch) {
+        axios
+            .delete(`/api/profile/education/${id}`)
+            .catch(err =>
+                dispatch({ type: GET_ERRORS, payload: err.response.data })
+            )
+    }
+}
+
+// EXPERIENCE ================================
+
+export function addExperience(expData, history) {
+    return function(dispatch) {
+        axios
+            .post('/api/profile/experience', expData)
+            .then(res => {
+                history.push(Url.DASHBOARD)
+            })
+            .catch(err =>
+                dispatch({ type: GET_ERRORS, payload: err.response.data })
+            )
+    }
+}
+
+export function deleteExperience(id) {
+    return function(dispatch) {
+        axios
+            .delete(`/api/profile/experience/${id}`)
+            .catch(err =>
+                dispatch({ type: GET_ERRORS, payload: err.response.data })
+            )
+    }
+}
+
+// DELETE PROFILE AND ACCOUNT ================================
 
 export function deleteProfileAndAccount(profileData, history) {
     return function(dispatch) {

@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as authActions from '../../actions/authActions'
 
-import TextInput from '../form/TextInput'
-import Button from '../elements/Button'
-import CenteredContainer from '../layout/CenteredContainer'
+import TextInput from '../../components/form/TextInput'
+import Button from '../../components/elements/Button'
+import CenteredContainer from '../../components/layout/CenteredContainer'
 
 import Content from '../../constants/Content'
 import Url from '../../constants/Url'
@@ -60,8 +60,8 @@ class Login extends Component {
         authActions.loginUser(userCredentials)
     }
 
-    handleTextUpdate(id, text) {
-        this.setState({ [id]: text })
+    handleTextUpdate(name, text) {
+        this.setState({ [name]: text })
     }
 
     render() {
@@ -69,7 +69,7 @@ class Login extends Component {
         return (
             <section className="section login">
                 <CenteredContainer>
-                    <h1 className="title is-1">{Content.LOGIN}</h1>
+                    <h1 className="title is-1">{Content.LOGIN_HEADING}</h1>
                     <div className="box">
                         <form onSubmit={this.handleSubmit}>
                             <TextInput

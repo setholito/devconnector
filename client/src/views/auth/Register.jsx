@@ -6,9 +6,9 @@ import { withRouter } from 'react-router-dom'
 
 import * as authActions from '../../actions/authActions'
 
-import Button from '../elements/Button'
-import CenteredContainer from '../layout/CenteredContainer'
-import TextInput from '../form/TextInput'
+import Button from '../../components/elements/Button'
+import CenteredContainer from '../../components/layout/CenteredContainer'
+import TextInput from '../../components/form/TextInput'
 
 import Content from '../../constants/Content'
 
@@ -62,8 +62,8 @@ class Register extends Component {
         authActions.registerUser(newUser, history)
     }
 
-    handleTextUpdate(id, text) {
-        this.setState({ [id]: text })
+    handleTextUpdate(name, text) {
+        this.setState({ [name]: text })
     }
 
     render() {
@@ -79,7 +79,7 @@ class Register extends Component {
         return (
             <section className="section register">
                 <CenteredContainer>
-                    <h1 className="title is-1">{Content.REGISTER}</h1>
+                    <h1 className="title is-1">{Content.REGISTER_HEADING}</h1>
                     <div className="box">
                         <form onSubmit={this.onFormSubmit}>
                             <TextInput

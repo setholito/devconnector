@@ -1,4 +1,5 @@
 $spinner-size: 60px;
+$spacer-single: 1em;
 
 .required,
 .optional {
@@ -21,5 +22,45 @@ $spinner-size: 60px;
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+.go-back-link {
+    margin-bottom: 0.5em;
+}
+
+ul.unstyled {
+    list-style: none;
+    margin-top: 0;
+    margin-left: 0;
+
+    &.with-lines {
+        li {
+            padding: 1em 0;
+            border-bottom: 1px #cccccc solid;
+
+            &:first-child {
+                padding-top: 0;
+            }
+
+            &:last-child {
+                border-bottom: transparent;
+            }
+        }
+    }
+}
+
+.spacer-bottom {
+    margin-bottom: $spacer-single;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    &.faded {
+        color: #ccc;
     }
 }

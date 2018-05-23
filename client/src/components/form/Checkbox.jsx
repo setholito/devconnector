@@ -2,21 +2,32 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class Checkbox extends Component {
-    constructor() {
-        super()
-    }
-
     render() {
-        return <input type="checkbox" checked={checked} />
+        const { checked, disabled, label, onClick } = this.props
+        return (
+            <label className="checkbox">
+                <input
+                    type="checkbox"
+                    checked={checked}
+                    disabled={disabled}
+                    onClick={onClick}
+                />{' '}
+                {label}
+            </label>
+        )
     }
 }
 
 Checkbox.defaultProps = {
-    // myProp: 'String'
+    checked: false,
+    disabled: false,
+    label: 'Default Label'
 }
 
 Checkbox.propTypes = {
-    // myProp: PropTypes.string.isRequired
+    checked: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool,
+    label: PropTypes.string.isRequired
 }
 
 export default Checkbox

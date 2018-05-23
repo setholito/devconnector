@@ -48,7 +48,7 @@ class Navbar extends Component {
         const startSectionLinks = (
             <div className="navbar-start">
                 <Link to={Url.DASHBOARD} className="navbar-item">
-                    {Content.DASHBOARD}
+                    {Content.DASHBOARD_HEADING}
                 </Link>
             </div>
         )

@@ -4,13 +4,17 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
 import * as profileActions from '../../actions/profileActions'
-import TextInput from '../form/TextInput'
-import TextArea from '../form/TextArea'
-import Select from '../form/Select'
-import CenteredContainer from '../layout/CenteredContainer'
+
+import TextInput from '../../components/form/TextInput'
+import TextArea from '../../components/form/TextArea'
+import Select from '../../components/form/Select'
+import Button from '../../components/elements/Button'
+import GoBackLink from '../../components/elements/GoBackLink'
+
+import CenteredContainer from '../../components/layout/CenteredContainer'
+
 import Content from '../../constants/Content'
 import Constants from '../../constants/Constants'
-import Button from '../elements/Button'
 
 class CreateProfile extends Component {
     constructor() {
@@ -175,81 +179,84 @@ class CreateProfile extends Component {
             <section className="section create-profile">
                 <CenteredContainer>
                     <h1 className="title is-1">
-                        {Content.CREATE_PROFILE_TITLE}
+                        {Content.CREATE_PROFILE_HEADING}
                     </h1>
-                    <form onSubmit={this.sendProfileUpdate}>
-                        <TextInput
-                            errorText={errors.handle}
-                            label="Handle"
-                            name="handle"
-                            onTextChange={this.updateProfileState}
-                            required
-                            value={handle}
-                        />
-                        <TextArea
-                            errorText={errors.bio}
-                            label="Bio"
-                            name="bio"
-                            onTextChange={this.updateProfileState}
-                            value={bio}
-                        />
-                        <TextInput
-                            errorText={errors.company}
-                            label="Company"
-                            name="company"
-                            onTextChange={this.updateProfileState}
-                            value={company}
-                        />
-                        <TextInput
-                            errorText={errors.location}
-                            label="Location"
-                            name="location"
-                            onTextChange={this.updateProfileState}
-                            value={location}
-                        />
-                        <hr />
-                        <TextArea
-                            errorText={errors.skills}
-                            label="Skills"
-                            name="skills"
-                            onTextChange={this.updateProfileState}
-                            required
-                            value={skills}
-                        />
-                        <Select
-                            errorText={errors.status}
-                            label="Status"
-                            name="status"
-                            onTextChange={this.updateProfileState}
-                            options={Constants.ARRAY_OF_STATUSES}
-                            required
-                            value={status}
-                        />
-                        <hr />
-                        <TextInput
-                            errorText={errors.website}
-                            label="Website URL"
-                            name="website"
-                            onTextChange={this.updateProfileState}
-                            value={website}
-                        />
-                        <TextInput
-                            errorText={errors.githubusername}
-                            label="GitHub Username"
-                            name="githubusername"
-                            onTextChange={this.updateProfileState}
-                            value={githubusername}
-                        />
-                        <Button
-                            onClick={this.toggleSocialInputs}
-                            text={`${
-                                showSocialMediaFlag ? 'Hide' : 'Show'
-                            } Social Inputs`}
-                        />
-                        {showSocialMediaInputs}
-                        <hr />
-                        <Button type="submit" className="is-success" />
-                    </form>
+                    <GoBackLink />
+                    <div className="box">
+                        <form onSubmit={this.sendProfileUpdate}>
+                            <TextInput
+                                errorText={errors.handle}
+                                label="Handle"
+                                name="handle"
+                                onTextChange={this.updateProfileState}
+                                required
+                                value={handle}
+                            />
+                            <TextArea
+                                errorText={errors.bio}
+                                label="Bio"
+                                name="bio"
+                                onTextChange={this.updateProfileState}
+                                value={bio}
+                            />
+                            <TextInput
+                                errorText={errors.company}
+                                label="Company"
+                                name="company"
+                                onTextChange={this.updateProfileState}
+                                value={company}
+                            />
+                            <TextInput
+                                errorText={errors.location}
+                                label="Location"
+                                name="location"
+                                onTextChange={this.updateProfileState}
+                                value={location}
+                            />
+                            <hr />
+                            <TextArea
+                                errorText={errors.skills}
+                                label="Skills"
+                                name="skills"
+                                onTextChange={this.updateProfileState}
+                                required
+                                value={skills}
+                            />
+                            <Select
+                                errorText={errors.status}
+                                label="Status"
+                                name="status"
+                                onTextChange={this.updateProfileState}
+                                options={Constants.ARRAY_OF_STATUSES}
+                                required
+                                value={status}
+                            />
+                            <hr />
+                            <TextInput
+                                errorText={errors.website}
+                                label="Website URL"
+                                name="website"
+                                onTextChange={this.updateProfileState}
+                                value={website}
+                            />
+                            <TextInput
+                                errorText={errors.githubusername}
+                                label="GitHub Username"
+                                name="githubusername"
+                                onTextChange={this.updateProfileState}
+                                value={githubusername}
+                            />
+                            <Button
+                                onClick={this.toggleSocialInputs}
+                                text={`${
+                                    showSocialMediaFlag ? 'Hide' : 'Show'
+                                } Social Inputs`}
+                            />
+                            {showSocialMediaInputs}
+                            <hr />
+                            <Button type="submit" className="is-success" />
+                        </form>
+                    </div>
                 </CenteredContainer>
             </section>
         )
