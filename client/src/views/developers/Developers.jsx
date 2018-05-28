@@ -22,7 +22,7 @@ class Developers extends Component {
 
         const mappedCards = developers.map(dev => {
             return (
-                <div className="column is-4">
+                <div key={dev.handle} className="column is-4">
                     <DeveloperCard dev={dev} />
                 </div>
             )

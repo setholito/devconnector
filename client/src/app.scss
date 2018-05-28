@@ -1,5 +1,6 @@
 $spinner-size: 60px;
 $spacer-single: 1em;
+$spacer-half: 0.5em;
 
 .required,
 .optional {
@@ -37,6 +38,10 @@ ul.unstyled {
 
 .spacer-bottom {
     margin-bottom: $spacer-single;
+}
+
+.spacer-right {
+    margin-right: $spacer-half;
 }
 
 h1,

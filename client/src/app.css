@@ -30,6 +30,9 @@ ul.unstyled {
 .spacer-bottom {
   margin-bottom: 1em; }
 
+.spacer-right {
+  margin-right: 0.5em; }
+
 h1.faded,
 h2.faded,
 h3.faded,
