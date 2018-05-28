@@ -19,28 +19,22 @@ class Dashboard extends Component {
         this.state = {
             errors: {}
         }
-
-        this.deleteProfile = this.deleteProfile.bind(this)
     }
 
-    componentWillReceiveProps(nextProps) {
+    static getDerivedStateFromProps(nextProps, prevState) {
         const { errors } = nextProps
+        let derivedState = {}
+
         if (errors) {
-            this.setState({ errors })
+            derivedState.errors = errors
         }
+
+        return derivedState
     }
 
     componentDidMount() {
         const { profileActions } = this.props
         profileActions.getCurrentProfile()
-    }
-
-    deleteProfile() {
-        const { profileActions } = this.props
-
-        if (window.confirm('Are you sure?')) {
-            profileActions.deleteProfileAndAccount()
-        }
     }
 
     render() {
@@ -55,12 +49,7 @@ class Dashboard extends Component {
         } else {
             // Check if logged in user has profile data
             if (Object.keys(profile).length > 0) {
-                dashboardContent = (
-                    <ActiveProfile
-                        profile={profile}
-                        deleteProfile={this.deleteProfile}
-                    />
-                )
+                dashboardContent = <ActiveProfile profile={profile} />
             } else {
                 // User is logged in but has no profile
                 dashboardContent = <NoProfile />

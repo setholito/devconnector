@@ -27,6 +27,8 @@ import Navbar from './components/layout/Navbar'
 
 import Register from './views/auth/Register'
 
+import Developers from './views/developers/Developers'
+
 import './app.css'
 
 // Check for token
@@ -67,6 +69,11 @@ class App extends Component {
                                 component={Register}
                                 exact
                                 path={Url.REGISTER}
+                            />
+                            <Route
+                                component={Developers}
+                                exact
+                                path={Url.DEVELOPERS}
                             />
                             <Switch>
                                 <PrivateRoute

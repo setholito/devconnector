@@ -37,10 +37,10 @@ router.get(
     }
 )
 
-// @route    GET api/profile/all
+// @route    GET api/profile/developers
 // @desc     Get all profiles
 // @acccess  Public
-router.get('/all', (req, res) => {
+router.get('/developers', (req, res) => {
     const errors = {}
 
     Profile.find()

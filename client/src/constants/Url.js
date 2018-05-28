@@ -13,5 +13,7 @@ export default {
     HOME: `${basePath}`,
 
     LOGIN: '/login',
-    REGISTER: '/register'
+    REGISTER: '/register',
+
+    DEVELOPERS: '/developers'
 }

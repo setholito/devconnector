@@ -50,6 +50,9 @@ class Navbar extends Component {
                 <Link to={Url.DASHBOARD} className="navbar-item">
                     {Content.DASHBOARD_HEADING}
                 </Link>
+                <Link to={Url.DEVELOPERS} className="navbar-item">
+                    Developers
+                </Link>
             </div>
         )
 

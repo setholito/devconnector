@@ -53,6 +53,8 @@ class EditProfile extends Component {
             derivedState.errors = errors
         }
 
+        // Profile nested in profile is bad practice.
+        // Needs refactor.
         if (profile.profile) {
             const isolatedProfile = profile.profile
             derivedState = Object.assign({}, derivedState, isolatedProfile)

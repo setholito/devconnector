@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function Card({ children, className, title }) {
-    const filterCardLinks = React.Children.toArray(children).filter(
-        item => item.props['card-link'] === 'true'
-    )
-
-    const filterChildren = React.Children.toArray(children).filter(
-        item => item.props['card-link'] === undefined
-    )
+function Card({ cardLinks, children, className, title }) {
+    const footerLinks = cardLinks.map((item, idx) => {
+        return (
+            <a href={item.link} className="card-footer-item">
+                {item.text}
+            </a>
+        )
+    })
 
     return (
         <div className={`card ${className}`}>
@@ -16,14 +16,15 @@ function Card({ children, className, title }) {
                 <p className="card-header-title">{title}</p>
             </header>
             <div className="card-content">
-                <div className="content">{filterChildren}</div>
+                <div className="content">{children}</div>
             </div>
-            <footer className="card-footer">{filterCardLinks}</footer>
+            <footer className="card-footer">{footerLinks}</footer>
         </div>
     )
 }
 
 Card.defaultProps = {
+    cardLinks: [],
     className: ''
 }
 

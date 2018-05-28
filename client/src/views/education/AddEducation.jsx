@@ -37,6 +37,17 @@ class AddEducation extends Component {
         this.onCheckboxClick = this.onCheckboxClick.bind(this)
     }
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+        const { errors } = nextProps
+        let derivedState = {}
+
+        if (errors) {
+            derivedState.errors = errors
+        }
+
+        return derivedState
+    }
+
     handleSubmit(e) {
         e.preventDefault()
         const { profileActions, history } = this.props

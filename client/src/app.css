@@ -26,13 +26,6 @@ ul.unstyled {
   list-style: none;
   margin-top: 0;
   margin-left: 0; }
-  ul.unstyled.with-lines li {
-    padding: 1em 0;
-    border-bottom: 1px #cccccc solid; }
-    ul.unstyled.with-lines li:first-child {
-      padding-top: 0; }
-    ul.unstyled.with-lines li:last-child {
-      border-bottom: transparent; }
 
 .spacer-bottom {
   margin-bottom: 1em; }
