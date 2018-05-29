@@ -10,9 +10,6 @@ function DeveloperCard({ dev }) {
         </span>
     ))
 
-    console.log(dev.social)
-    // const devLinks = Object.keys(dev.social).map(link => dev.social[link])
-
     return (
         <div className="dashboard-card spacer-bottom">
             <Card title={dev.handle} cardLinks={[]}>

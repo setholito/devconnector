@@ -19,10 +19,9 @@ class Developers extends Component {
         const { developers } = this.props
 
         const showLoader = developers.length === 0 ? <Spinner /> : null
-
-        const mappedCards = developers.map(dev => {
+        const mappedCards = developers.map((dev, idx) => {
             return (
-                <div key={dev.handle} className="column is-4">
+                <div key={idx} className="column is-4">
                     <DeveloperCard dev={dev} />
                 </div>
             )
