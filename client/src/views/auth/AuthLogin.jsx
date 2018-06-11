@@ -11,7 +11,7 @@ import CenteredContainer from '../../components/layout/CenteredContainer'
 import Content from '../../constants/Content'
 import Url from '../../constants/Url'
 
-class Login extends Component {
+class AuthLogin extends Component {
     constructor(props) {
         super(props)
 
@@ -99,7 +99,7 @@ class Login extends Component {
     }
 }
 
-Login.propTypes = {
+AuthLogin.propTypes = {
     auth: PropTypes.object.isRequired,
     authActions: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
@@ -119,4 +119,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AuthLogin)

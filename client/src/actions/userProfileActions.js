@@ -1,16 +1,17 @@
 import axios from 'axios'
 import {
+    GET_CURRENT_PROFILE,
     CLEAR_CURRENT_PROFILE,
     CLEAR_ERRORS,
     GET_ERRORS,
-    GET_PROFILE,
-    PROFILE_LOADING,
+    GET_USER_PROFILE,
+    TOGGLE_LOADING,
     SET_CURRENT_USER
 } from './actionTypes'
 import Url from '../constants/Url'
 
 export function setProfileLoading() {
-    return { type: PROFILE_LOADING }
+    return { type: TOGGLE_LOADING }
 }
 
 // PROFILE ================================
@@ -21,9 +22,10 @@ export function getCurrentProfile() {
         axios
             .get('/api/profile')
             .then(res => {
-                dispatch({ type: GET_PROFILE, payload: res.data })
+                const { data } = res
+                dispatch({ type: GET_USER_PROFILE, profile: data })
             })
-            .catch(err => dispatch({ type: GET_PROFILE, payload: {} }))
+            .catch(err => dispatch({ type: GET_USER_PROFILE, profile: {} }))
     }
 }
 
@@ -59,6 +61,22 @@ export function updateProfile(profileData, history) {
     }
 }
 
+// GET PROFILE BY HANDLE ================================
+
+export function getProfileByHandle(handle) {
+    return function(dispatch) {
+        dispatch(setProfileLoading())
+        axios
+            .get(`/api/profile/handle/${handle}`)
+            .then(res =>
+                dispatch({ type: GET_USER_PROFILE, profile: res.data })
+            )
+            .catch(err =>
+                dispatch({ type: GET_ERRORS, payload: err.response.data })
+            )
+    }
+}
+
 // EDUCATION ================================
 
 export function addEducation(eduData, history) {
@@ -80,8 +98,8 @@ export function deleteEducation(id) {
             .delete(`/api/profile/education/${id}`)
             .then(res => {
                 dispatch({
-                    type: GET_PROFILE,
-                    payload: res.data
+                    type: GET_USER_PROFILE,
+                    profile: res.data
                 })
             })
             .catch(err =>
@@ -111,13 +129,37 @@ export function deleteExperience(id) {
             .delete(`/api/profile/experience/${id}`)
             .then(res => {
                 dispatch({
-                    type: GET_PROFILE,
-                    payload: res.data
+                    type: GET_USER_PROFILE,
+                    profile: res.data
                 })
             })
             .catch(err =>
                 dispatch({ type: GET_ERRORS, payload: err.response.data })
             )
+    }
+}
+
+// GITHUB ================================
+
+export function getGitHubRepos(username) {
+    return function(dispatch) {
+        const config = {
+            clientId: 'f9afc36db9e5d334efff',
+            clientSecret: 'bff5a5a90e3d14e8337c8954c557662307fec3d8',
+            count: 3,
+            sort: 'created: asc'
+        }
+
+        axios
+            .get(
+                `https://api.github.com/users/${username}/repos?per_page=${
+                    config.count
+                }&sort=${config.sort}&client_id=${
+                    config.clientId
+                }&client_secret=${config.clientSecret}`
+            )
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
     }
 }
 

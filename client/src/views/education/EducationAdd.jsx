@@ -13,7 +13,7 @@ import CenteredContainer from '../../components/layout/CenteredContainer'
 
 import Content from '../../constants/Content'
 
-import * as profileActions from '../../actions/profileActions'
+import * as userProfileActions from '../../actions/userProfileActions'
 
 class AddEducation extends Component {
     constructor() {
@@ -50,7 +50,7 @@ class AddEducation extends Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        const { profileActions, history } = this.props
+        const { userProfileActions, history } = this.props
         const {
             current,
             degree,
@@ -71,7 +71,7 @@ class AddEducation extends Component {
             to
         }
 
-        profileActions.addEducation(eduData, history)
+        userProfileActions.addEducation(eduData, history)
     }
 
     handleTextUpdate(name, text) {
@@ -181,7 +181,7 @@ class AddEducation extends Component {
 
 AddEducation.propTypes = {
     history: PropTypes.object.isRequired,
-    profileActions: PropTypes.object.isRequired
+    userProfileActions: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
@@ -195,7 +195,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        profileActions: bindActionCreators(profileActions, dispatch)
+        userProfileActions: bindActionCreators(userProfileActions, dispatch)
     }
 }
 

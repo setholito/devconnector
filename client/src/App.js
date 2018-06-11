@@ -6,27 +6,28 @@ import jwtDecode from 'jwt-decode'
 import setAuthToken from './utils/setAuthToken'
 
 import * as authActions from './actions/authActions'
-import * as profileActions from './actions/profileActions'
+import * as userProfileActions from './actions/userProfileActions'
 
 import PrivateRoute from './components/common/PrivateRoute'
 import Url from './constants/Url'
 
-import Login from './views/auth/Login'
+import AuthLogin from './views/auth/AuthLogin'
 
-import CreateProfile from './views/profile/CreateProfile'
-import EditProfile from './views/profile/EditProfile'
-import DisplayProfile from './views/profile/DisplayProfile'
+import UserProfileCreate from './views/user-profile/UserProfileCreate'
+import UserProfileEdit from './views/user-profile/UserProfileEdit'
+import UserProfileDisplay from './views/user-profile/UserProfileDisplay'
 
 import Dashboard from './views/dashboard/Dashboard'
-import AddEducation from './views/education/AddEducation'
-import AddExperience from './views/experience/AddExperience'
+import EducationAdd from './views/education/EducationAdd'
+import ExperienceAdd from './views/experience/ExperienceAdd'
 
 import Footer from './components/layout/Footer'
 import Landing from './views/landing/Landing'
 import Navbar from './components/layout/Navbar'
 
-import Register from './views/auth/Register'
+import AuthRegister from './views/auth/AuthRegister'
 
+import DeveloperProfileDisplay from './views/developer-profile/DeveloperProfileDisplay'
 import Developers from './views/developers/Developers'
 
 import './app.css'
@@ -48,7 +49,7 @@ if (localStorage.jwtToken) {
         store.dispatch(authActions.logoutUser())
 
         // Clear out current profile
-        store.dispatch(profileActions.clearCurrentProfile())
+        store.dispatch(userProfileActions.clearCurrentProfile())
 
         // Redirect to loginUser
         window.location.href = '/login'
@@ -63,12 +64,21 @@ class App extends Component {
                     <div className="app">
                         <Navbar />
                         <main role="main">
-                            <Route exact path={Url.HOME} component={Landing} />
-                            <Route exact path={Url.LOGIN} component={Login} />
+                            <Route component={Landing} exact path={Url.HOME} />
                             <Route
-                                component={Register}
+                                component={AuthLogin}
+                                exact
+                                path={Url.LOGIN}
+                            />
+                            <Route
+                                component={AuthRegister}
                                 exact
                                 path={Url.REGISTER}
+                            />
+                            <Route
+                                component={DeveloperProfileDisplay}
+                                exact
+                                path={Url.USER_PROFILE_BY_HANDLE}
                             />
                             <Route
                                 component={Developers}
@@ -77,34 +87,34 @@ class App extends Component {
                             />
                             <Switch>
                                 <PrivateRoute
+                                    component={Dashboard}
                                     exact
                                     path={Url.DASHBOARD}
-                                    component={Dashboard}
                                 />
                                 <PrivateRoute
+                                    component={UserProfileCreate}
                                     exact
-                                    path={Url.CREATE_PROFILE}
-                                    component={CreateProfile}
+                                    path={Url.USER_PROFILE_CREATE}
                                 />
                                 <PrivateRoute
+                                    component={UserProfileDisplay}
                                     exact
-                                    path={`${Url.DISPLAY_PROFILE}/:handle`}
-                                    component={DisplayProfile}
+                                    path={Url.USER_PROFILE_DISPLAY}
                                 />
                                 <PrivateRoute
+                                    component={UserProfileEdit}
                                     exact
-                                    path={Url.EDIT_PROFILE}
-                                    component={EditProfile}
+                                    path={Url.USER_PROFILE_EDIT}
                                 />
                                 <PrivateRoute
+                                    component={EducationAdd}
                                     exact
                                     path={Url.ADD_EDUCATION}
-                                    component={AddEducation}
                                 />
                                 <PrivateRoute
+                                    component={ExperienceAdd}
                                     exact
                                     path={Url.ADD_EXPERIENCE}
-                                    component={AddExperience}
                                 />
                             </Switch>
                         </main>

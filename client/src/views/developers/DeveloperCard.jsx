@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 import Card from '../../components/common/Card'
 
@@ -36,6 +37,11 @@ function DeveloperCard({ dev }) {
                             </li>
                             <li>
                                 <strong>Status</strong>: {dev.status}
+                            </li>
+                            <li>
+                                <Link to={`/profile/handle/${dev.handle}`}>
+                                    See Profile >
+                                </Link>
                             </li>
                         </ul>
                     </div>

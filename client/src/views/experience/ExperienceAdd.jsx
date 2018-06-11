@@ -13,9 +13,9 @@ import CenteredContainer from '../../components/layout/CenteredContainer'
 
 import Content from '../../constants/Content'
 
-import * as profileActions from '../../actions/profileActions'
+import * as userProfileActions from '../../actions/userProfileActions'
 
-class AddExperience extends Component {
+class ExperienceAdd extends Component {
     constructor() {
         super()
 
@@ -39,6 +39,7 @@ class AddExperience extends Component {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const { errors } = nextProps
+
         let derivedState = {}
 
         if (errors) {
@@ -50,7 +51,7 @@ class AddExperience extends Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        const { profileActions, history } = this.props
+        const { userProfileActions, history } = this.props
         const {
             company,
             current,
@@ -71,7 +72,7 @@ class AddExperience extends Component {
             to
         }
 
-        profileActions.addExperience(expData, history)
+        userProfileActions.addExperience(expData, history)
     }
 
     handleTextUpdate(name, text) {
@@ -176,27 +177,28 @@ class AddExperience extends Component {
     }
 }
 
-AddExperience.propTypes = {
+ExperienceAdd.propTypes = {
     errors: PropTypes.object.isRequired,
-    profile: PropTypes.object.isRequired,
-    profileActions: PropTypes.object.isRequired
+    userProfile: PropTypes.object.isRequired,
+    userProfileActions: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
-    const { errors, profile } = state
+    const { errors, userProfile } = state
 
     return {
         errors,
-        profile
+        userProfile
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        profileActions: bindActionCreators(profileActions, dispatch)
+        userProfileActions: bindActionCreators(userProfileActions, dispatch)
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-    withRouter(AddExperience)
-)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(ExperienceAdd))

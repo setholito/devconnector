@@ -1,9 +1,10 @@
 const basePath = '/'
 
 export default {
-    CREATE_PROFILE: '/create-profile',
-    DISPLAY_PROFILE: '/profile',
-    EDIT_PROFILE: '/edit-profile',
+    USER_PROFILE_DISPLAY: '/profile',
+    USER_PROFILE_CREATE: '/create-profile',
+    USER_PROFILE_EDIT: '/edit-profile',
+    USER_PROFILE_BY_HANDLE: '/profile/handle/:handle',
 
     ADD_EDUCATION: '/add-education',
     ADD_EXPERIENCE: '/add-experience',

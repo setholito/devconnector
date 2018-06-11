@@ -33,6 +33,9 @@ ul.unstyled {
 .spacer-right {
   margin-right: 0.5em; }
 
+.circle {
+  border-radius: 1000px; }
+
 h1.faded,
 h2.faded,
 h3.faded,

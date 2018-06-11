@@ -12,6 +12,9 @@ export default {
     LOGOUT: 'Logout',
     REGISTER: 'Register',
 
+    // PROFILE ==========
+    PROFILE: 'Profile',
+
     // CREATE PROFILE ==========
     CREATE_PROFILE_HEADING: 'Create Profile',
 

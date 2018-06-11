@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import * as authActions from '../../actions/authActions'
-import * as profileActions from '../../actions/profileActions'
+import * as userProfileActions from '../../actions/userProfileActions'
 
 import Content from '../../constants/Content'
 import Url from '../../constants/Url'
@@ -31,10 +31,10 @@ class Navbar extends Component {
 
     logoutClick(e) {
         e.preventDefault()
-        const { authActions, history, profileActions } = this.props
+        const { authActions, history, userProfileActions } = this.props
 
         authActions.logoutUser()
-        profileActions.clearCurrentProfile()
+        userProfileActions.clearCurrentProfile()
 
         history.push(Url.LOGIN)
     }
@@ -58,13 +58,17 @@ class Navbar extends Component {
 
         const authLinks = (
             <div className="navbar-end">
-                <a href="" onClick={this.logoutClick} className="navbar-item">
+                <Link className="navbar-item" to={Url.USER_PROFILE_DISPLAY}>
                     <img
+                        className="circle"
                         src={user.avatar}
                         alt={`${user.name} - Gravatar`}
                         title={`${user.name} - Gravatar`}
                     />
-                    {'\xa0\xa0'}
+                    {'\xa0'}
+                    {Content.PROFILE}
+                </Link>
+                <a href="" onClick={this.logoutClick} className="navbar-item">
                     {Content.LOGOUT}
                 </a>
             </div>
@@ -131,8 +135,11 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         authActions: bindActionCreators(authActions, dispatch),
-        profileActions: bindActionCreators(profileActions, dispatch)
+        userProfileActions: bindActionCreators(userProfileActions, dispatch)
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navbar))
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(Navbar))

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function ListAuto({ arr }) {
+function ListAuto({ arr, className }) {
     const mappedItems = arr.map((item, idx) => {
         return (
             <li key={idx}>
@@ -10,15 +10,17 @@ function ListAuto({ arr }) {
         )
     })
 
-    return <ul className="unstyled with-lines">{mappedItems}</ul>
+    return <ul className={`unstyled ${className}`}>{mappedItems}</ul>
 }
 
 ListAuto.defaultProps = {
-    arr: []
+    arr: [],
+    className: ''
 }
 
 ListAuto.propTypes = {
-    arr: PropTypes.array.isRequired
+    arr: PropTypes.array.isRequired,
+    className: PropTypes.string
 }
 
 export default ListAuto

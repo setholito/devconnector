@@ -4,22 +4,26 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import format from 'date-fns/format'
 
-import DisplayExperience from '../experience/DisplayExperience'
-import DisplayEducation from '../education/DisplayEducation'
+import ExperienceDisplay from '../experience/ExperienceDisplay'
+import EducationDisplay from '../education/EducationDisplay'
 
 import Card from '../../components/common/Card'
 import Button from '../../components/elements/Button'
 
-import * as profileActions from '../../actions/profileActions'
+import * as userProfileActions from '../../actions/userProfileActions'
 
 import Url from '../../constants/Url'
 
-class ActiveProfile extends Component {
+class DashboardProfileActive extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            profile: this.props.profile
+            profile: {
+                experience: [],
+                education: [],
+                handle: ''
+            }
         }
 
         this.deleteExperience = this.deleteExperience.bind(this)
@@ -39,30 +43,30 @@ class ActiveProfile extends Component {
 
     deleteExperience(e) {
         const { id } = e.target
-        const { profileActions } = this.props
-        profileActions.deleteExperience(id)
+        const { userProfileActions } = this.props
+        userProfileActions.deleteExperience(id)
     }
 
     deleteEducation(e) {
         const { id } = e.target
-        const { profileActions } = this.props
-        profileActions.deleteEducation(id)
+        const { userProfileActions } = this.props
+        userProfileActions.deleteEducation(id)
     }
 
     deleteProfile() {
-        const { profileActions } = this.props
+        const { userProfileActions } = this.props
 
         if (window.confirm('Are you sure?')) {
-            profileActions.deleteProfileAndAccount()
+            userProfileActions.deleteProfileAndAccount()
         }
     }
 
     render() {
         const { profile } = this.state
-        const { profileActions, deleteProfile } = this.props
+        const { userProfileActions, deleteProfile } = this.props
 
         const experienceTable = (
-            <DisplayExperience
+            <ExperienceDisplay
                 experience={profile.experience}
                 deleteExperience={this.deleteExperience}
             />
@@ -76,7 +80,7 @@ class ActiveProfile extends Component {
             )
 
         const educationTable = (
-            <DisplayEducation
+            <EducationDisplay
                 education={profile.education}
                 deleteEducation={this.deleteEducation}
             />
@@ -93,7 +97,7 @@ class ActiveProfile extends Component {
             <div className="active-profile">
                 <h5 className="title is-5">
                     Hi{' '}
-                    <Link to={`${Url.DISPLAY_PROFILE}/${profile.handle}`}>
+                    <Link to={`${Url.USER_PROFILE_DISPLAY}`}>
                         {profile.handle}
                     </Link>!
                 </h5>
@@ -133,8 +137,11 @@ class ActiveProfile extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        profileActions: bindActionCreators(profileActions, dispatch)
+        userProfileActions: bindActionCreators(userProfileActions, dispatch)
     }
 }
 
-export default connect(null, mapDispatchToProps)(ActiveProfile)
+export default connect(
+    null,
+    mapDispatchToProps
+)(DashboardProfileActive)

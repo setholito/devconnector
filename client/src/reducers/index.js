@@ -1,12 +1,15 @@
 import { combineReducers } from 'redux'
+
 import authReducer from './authReducer'
-import errorReducer from './errorReducer'
-import profileReducer from './profileReducer'
+import developerProfileReducer from './developerProfileReducer'
 import developerReducer from './developerReducer'
+import errorReducer from './errorReducer'
+import userProfileReducer from './userProfileReducer'
 
 export default combineReducers({
     auth: authReducer,
+    developerProfile: developerProfileReducer,
+    developers: developerReducer,
     errors: errorReducer,
-    profile: profileReducer,
-    developers: developerReducer
+    userProfile: userProfileReducer
 })

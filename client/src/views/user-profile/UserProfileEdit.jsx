@@ -1,28 +1,27 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router-dom'
-import * as profileActions from '../../actions/profileActions'
+
+import * as userProfileActions from '../../actions/userProfileActions'
 
 import TextInput from '../../components/form/TextInput'
 import TextArea from '../../components/form/TextArea'
 import Select from '../../components/form/Select'
-import Button from '../../components/elements/Button'
-import GoBackLink from '../../components/elements/GoBackLink'
-
 import CenteredContainer from '../../components/layout/CenteredContainer'
+import GoBackLink from '../../components/elements/GoBackLink'
 
 import Content from '../../constants/Content'
 import Constants from '../../constants/Constants'
 
-class CreateProfile extends Component {
+import Button from '../../components/elements/Button'
+
+class EditProfile extends Component {
     constructor() {
         super()
 
         this.state = {
-            displaySocialInputs: false,
-
             bio: '',
             company: '',
             handle: '',
@@ -30,32 +29,53 @@ class CreateProfile extends Component {
             skills: '',
             status: '',
 
-            facebook: '',
+            website: '',
             githubusername: '',
+
+            facebook: '',
             instagram: '',
             linkedin: '',
             twitter: '',
-            website: '',
             youtube: '',
 
-            errors: {},
-            showSocialMediaFlag: false
+            errors: {}
         }
 
         this.updateProfileState = this.updateProfileState.bind(this)
         this.sendProfileUpdate = this.sendProfileUpdate.bind(this)
-        this.toggleSocialInputs = this.toggleSocialInputs.bind(this)
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        const { errors } = nextProps
+        const { errors, userProfile } = nextProps
+        const { profile } = userProfile
+
         let derivedState = {}
 
         if (errors) {
             derivedState.errors = errors
         }
 
+        derivedState = Object.assign({}, derivedState, profile)
+
+        if (profile && profile.skills) {
+            derivedState.skills = profile.skills.join(',')
+        }
+
+        // Pull social links out of social object
+        if (profile && profile.social) {
+            derivedState.facebook = profile.social.facebook
+            derivedState.twitter = profile.social.twitter
+            derivedState.youtube = profile.social.youtube
+            derivedState.linkedin = profile.social.linkedin
+            derivedState.instagram = profile.social.instagram
+        }
+
         return derivedState
+    }
+
+    componentDidMount() {
+        const { userProfileActions } = this.props
+        userProfileActions.getCurrentProfile()
     }
 
     updateProfileState(name, value) {
@@ -64,6 +84,7 @@ class CreateProfile extends Component {
 
     sendProfileUpdate(e) {
         e.preventDefault()
+        const { history, userProfileActions } = this.props
         const {
             bio,
             company,
@@ -79,9 +100,8 @@ class CreateProfile extends Component {
             website,
             youtube
         } = this.state
-        const { history, profileActions } = this.props
 
-        const newProfile = {
+        const updatedProfile = {
             bio,
             company,
             facebook,
@@ -97,13 +117,7 @@ class CreateProfile extends Component {
             youtube
         }
 
-        profileActions.createProfile(newProfile, history)
-    }
-
-    toggleSocialInputs() {
-        this.setState(prevState => ({
-            showSocialMediaFlag: !prevState.showSocialMediaFlag
-        }))
+        userProfileActions.updateProfile(updatedProfile, history)
     }
 
     render() {
@@ -121,65 +135,14 @@ class CreateProfile extends Component {
             instagram,
             youtube,
             linkedin,
-            errors,
-            showSocialMediaFlag
+            errors
         } = this.state
-
-        const socialMediaInputs = (
-            <Fragment>
-                <hr />
-                <TextInput
-                    errorText={errors.facebook}
-                    label="Facebook"
-                    name="facebook"
-                    onTextChange={this.updateProfileState}
-                    optional
-                    value={facebook}
-                />
-                <TextInput
-                    errorText={errors.twitter}
-                    label="Twitter"
-                    name="twitter"
-                    onTextChange={this.updateProfileState}
-                    optional
-                    value={twitter}
-                />
-                <TextInput
-                    errorText={errors.instagram}
-                    label="Instagram"
-                    name="instagram"
-                    onTextChange={this.updateProfileState}
-                    optional
-                    value={instagram}
-                />
-                <TextInput
-                    errorText={errors.youtube}
-                    label="YouTube"
-                    name="youtube"
-                    onTextChange={this.updateProfileState}
-                    optional
-                    value={youtube}
-                />
-                <TextInput
-                    errorText={errors.linkedin}
-                    label="LinkedIn"
-                    name="linkedin"
-                    onTextChange={this.updateProfileState}
-                    optional
-                    value={linkedin}
-                />
-            </Fragment>
-        )
-
-        const showSocialMediaInputs = showSocialMediaFlag
-            ? socialMediaInputs
-            : null
 
         return (
             <section className="section create-profile">
                 <CenteredContainer>
                     <h1 className="title is-1">
-                        {Content.CREATE_PROFILE_HEADING}
+                        {Content.EDIT_PROFILE_HEADING}
                     </h1>
                     <GoBackLink />
                     <div className="box">
@@ -216,6 +179,7 @@ class CreateProfile extends Component {
                             <hr />
                             <TextArea
                                 errorText={errors.skills}
+                                helpText="Must be comma separated."
                                 label="Skills"
                                 name="skills"
                                 onTextChange={this.updateProfileState}
@@ -246,15 +210,53 @@ class CreateProfile extends Component {
                                 onTextChange={this.updateProfileState}
                                 value={githubusername}
                             />
-                            <Button
-                                onClick={this.toggleSocialInputs}
-                                text={`${
-                                    showSocialMediaFlag ? 'Hide' : 'Show'
-                                } Social Inputs`}
-                            />
-                            {showSocialMediaInputs}
                             <hr />
-                            <Button type="submit" className="is-success" />
+                            <TextInput
+                                errorText={errors.facebook}
+                                label="Facebook"
+                                name="facebook"
+                                onTextChange={this.updateProfileState}
+                                optional
+                                value={facebook}
+                            />
+                            <TextInput
+                                errorText={errors.twitter}
+                                label="Twitter"
+                                name="twitter"
+                                onTextChange={this.updateProfileState}
+                                optional
+                                value={twitter}
+                            />
+                            <TextInput
+                                errorText={errors.instagram}
+                                label="Instagram"
+                                name="instagram"
+                                onTextChange={this.updateProfileState}
+                                optional
+                                value={instagram}
+                            />
+                            <TextInput
+                                errorText={errors.youtube}
+                                label="YouTube"
+                                name="youtube"
+                                onTextChange={this.updateProfileState}
+                                optional
+                                value={youtube}
+                            />
+                            <TextInput
+                                errorText={errors.linkedin}
+                                label="LinkedIn"
+                                name="linkedin"
+                                onTextChange={this.updateProfileState}
+                                optional
+                                value={linkedin}
+                            />
+                            <hr />
+                            <Button
+                                className="is-success"
+                                text="Update"
+                                type="submit"
+                            />
                         </form>
                     </div>
                 </CenteredContainer>
@@ -263,26 +265,27 @@ class CreateProfile extends Component {
     }
 }
 
-CreateProfile.propTypes = {
+EditProfile.propTypes = {
     errors: PropTypes.object.isRequired,
-    profile: PropTypes.object.isRequired
+    userProfile: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
-    const { errors, profile } = state
+    const { errors, userProfile } = state
 
     return {
         errors,
-        profile
+        userProfile
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        profileActions: bindActionCreators(profileActions, dispatch)
+        userProfileActions: bindActionCreators(userProfileActions, dispatch)
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-    withRouter(CreateProfile)
-)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(EditProfile))

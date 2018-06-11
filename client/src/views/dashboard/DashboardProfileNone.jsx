@@ -6,7 +6,7 @@ import Url from '../../constants/Url'
 
 import Message from '../../components/common/Message'
 
-function NoProfile() {
+function DashboardProfileNone() {
     return (
         <div className="no-profile">
             <Message heading="No Profile" type="warning">
@@ -15,7 +15,10 @@ function NoProfile() {
                     <br />
                     <br />
                 </p>
-                <Link to={Url.CREATE_PROFILE} className="button is-primary">
+                <Link
+                    to={Url.USER_PROFILE_CREATE}
+                    className="button is-primary"
+                >
                     {Content.CREATE_PROFILE_CTA}
                 </Link>
             </Message>
@@ -23,4 +26,4 @@ function NoProfile() {
     )
 }
 
-export default NoProfile
+export default DashboardProfileNone

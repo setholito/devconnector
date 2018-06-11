@@ -3,14 +3,16 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import * as profileActions from '../../actions/profileActions'
+import * as userProfileActions from '../../actions/userProfileActions'
 
 import Content from '../../constants/Content'
 
-import ActiveProfile from './ActiveProfile'
-import NoProfile from './NoProfile'
+import DashboardProfileActive from './DashboardProfileActive'
+import DashboardProfileNone from './DashboardProfileNone'
 
 import Spinner from '../../components/common/Spinner'
+
+import isEmpty from '../../validation/is-empty'
 
 class Dashboard extends Component {
     constructor() {
@@ -33,26 +35,27 @@ class Dashboard extends Component {
     }
 
     componentDidMount() {
-        const { profileActions } = this.props
-        profileActions.getCurrentProfile()
+        const { userProfileActions } = this.props
+        userProfileActions.getCurrentProfile()
     }
 
     render() {
-        const { errors } = this.props
+        const { errors, loading, userProfile } = this.props
         const { user } = this.props.auth
-        const { profile, loading } = this.props.profile
 
         let dashboardContent
 
-        if (profile === null || loading) {
+        if (isEmpty(userProfile) || loading) {
             dashboardContent = <Spinner />
         } else {
             // Check if logged in user has profile data
-            if (Object.keys(profile).length > 0) {
-                dashboardContent = <ActiveProfile profile={profile} />
+            if (!isEmpty(userProfile)) {
+                dashboardContent = (
+                    <DashboardProfileActive profile={userProfile.profile} />
+                )
             } else {
                 // User is logged in but has no profile
-                dashboardContent = <NoProfile />
+                dashboardContent = <DashboardProfileNone />
             }
         }
 
@@ -75,24 +78,28 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
     auth: PropTypes.object.isRequired,
-    profile: PropTypes.object.isRequired,
-    profileActions: PropTypes.object.isRequired
+    userProfile: PropTypes.object.isRequired,
+    userProfileActions: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
-    const { auth, errors, profile } = state
+    const { auth, errors, loading, userProfile } = state
 
     return {
         auth,
         errors,
-        profile
+        loading,
+        userProfile
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        profileActions: bindActionCreators(profileActions, dispatch)
+        userProfileActions: bindActionCreators(userProfileActions, dispatch)
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Dashboard)
