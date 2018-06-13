@@ -34,19 +34,6 @@ class DeveloperProfileDisplay extends Component {
         return derivedState
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.log('prevProps', prevProps)
-        // console.log('prevState', prevState)
-        // console.log('snapshot', snapshot)
-        if (
-            isEmpty(prevProps.userProfile.profile) &&
-            isEmpty(this.props.userProfile.profile)
-        ) {
-            console.log('Farts')
-            // this.props.history.push('/not-found')
-        }
-    }
-
     componentDidMount() {
         const { userProfileActions, match } = this.props
         userProfileActions.getProfileByHandle(match.params.handle)
