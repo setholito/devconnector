@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    Redirect
+} from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
 import jwtDecode from 'jwt-decode'
@@ -29,6 +34,8 @@ import AuthRegister from './views/auth/AuthRegister'
 
 import DeveloperProfileDisplay from './views/developer-profile/DeveloperProfileDisplay'
 import Developers from './views/developers/Developers'
+
+import NotFound from './views/system/NotFound'
 
 import './app.css'
 
@@ -64,28 +71,32 @@ class App extends Component {
                     <div className="app">
                         <Navbar />
                         <main role="main">
-                            <Route component={Landing} exact path={Url.HOME} />
-                            <Route
-                                component={AuthLogin}
-                                exact
-                                path={Url.LOGIN}
-                            />
-                            <Route
-                                component={AuthRegister}
-                                exact
-                                path={Url.REGISTER}
-                            />
-                            <Route
-                                component={DeveloperProfileDisplay}
-                                exact
-                                path={Url.USER_PROFILE_BY_HANDLE}
-                            />
-                            <Route
-                                component={Developers}
-                                exact
-                                path={Url.DEVELOPERS}
-                            />
                             <Switch>
+                                <Route
+                                    component={Landing}
+                                    exact
+                                    path={Url.HOME}
+                                />
+                                <Route
+                                    component={AuthLogin}
+                                    exact
+                                    path={Url.LOGIN}
+                                />
+                                <Route
+                                    component={AuthRegister}
+                                    exact
+                                    path={Url.REGISTER}
+                                />
+                                <Route
+                                    component={DeveloperProfileDisplay}
+                                    exact
+                                    path={Url.USER_PROFILE_BY_HANDLE}
+                                />
+                                <Route
+                                    component={Developers}
+                                    exact
+                                    path={Url.DEVELOPERS}
+                                />
                                 <PrivateRoute
                                     component={Dashboard}
                                     exact
@@ -115,6 +126,10 @@ class App extends Component {
                                     component={ExperienceAdd}
                                     exact
                                     path={Url.ADD_EXPERIENCE}
+                                />
+                                <Route
+                                    path={Url.NOT_FOUND}
+                                    component={NotFound}
                                 />
                             </Switch>
                         </main>

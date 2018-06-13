@@ -16,5 +16,7 @@ export default {
     LOGIN: '/login',
     REGISTER: '/register',
 
-    DEVELOPERS: '/developers'
+    DEVELOPERS: '/developers',
+
+    NOT_FOUND: '/not-found'
 }

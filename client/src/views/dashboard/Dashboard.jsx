@@ -45,7 +45,7 @@ class Dashboard extends Component {
 
         let dashboardContent
 
-        if (isEmpty(userProfile) || loading) {
+        if (isEmpty(userProfile) || loading.status) {
             dashboardContent = <Spinner />
         } else {
             // Check if logged in user has profile data

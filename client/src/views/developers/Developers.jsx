@@ -16,9 +16,9 @@ class Developers extends Component {
     }
 
     render() {
-        const { developers } = this.props
+        const { developers, loading } = this.props
 
-        const showLoader = developers.length === 0 ? <Spinner /> : null
+        const showLoader = loading.status ? <Spinner /> : null
         const mappedCards = developers.map((dev, idx) => {
             return (
                 <div key={idx} className="column is-4">
@@ -45,14 +45,16 @@ Developers.defaultProps = {
 
 Developers.propTypes = {
     developerActions: PropTypes.object.isRequired,
-    developers: PropTypes.array.isRequired
+    developers: PropTypes.array.isRequired,
+    loading: PropTypes.object
 }
 
 function mapStateToProps(state) {
-    const { developers } = state
+    const { developers, loading } = state
 
     return {
-        developers
+        developers,
+        loading
     }
 }
 
@@ -62,4 +64,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Developers)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Developers)

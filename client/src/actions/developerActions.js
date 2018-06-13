@@ -1,14 +1,11 @@
 import axios from 'axios'
 import { GET_ALL_DEVELOPERS, GET_ERRORS, TOGGLE_LOADING } from './actionTypes'
 import Url from '../constants/Url'
-
-export function setProfileLoading() {
-    return { type: TOGGLE_LOADING }
-}
+import * as commonActions from './commonActions'
 
 export function getDevelopers() {
     return function(dispatch) {
-        dispatch(setProfileLoading())
+        dispatch(commonActions.toggleLoading())
         axios
             .get('/api/profile/developers')
             .then(res => {
@@ -17,5 +14,6 @@ export function getDevelopers() {
             .catch(err =>
                 dispatch({ type: GET_ERRORS, payload: err.response.data })
             )
+            .then(() => dispatch(commonActions.toggleLoading()))
     }
 }

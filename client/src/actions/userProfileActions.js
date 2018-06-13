@@ -8,17 +8,14 @@ import {
     TOGGLE_LOADING,
     SET_CURRENT_USER
 } from './actionTypes'
+import * as commonActions from './commonActions'
 import Url from '../constants/Url'
-
-export function setProfileLoading() {
-    return { type: TOGGLE_LOADING }
-}
 
 // PROFILE ================================
 
 export function getCurrentProfile() {
     return function(dispatch) {
-        dispatch(setProfileLoading())
+        dispatch(commonActions.toggleLoading())
         axios
             .get('/api/profile')
             .then(res => {
@@ -26,6 +23,7 @@ export function getCurrentProfile() {
                 dispatch({ type: GET_USER_PROFILE, profile: data })
             })
             .catch(err => dispatch({ type: GET_USER_PROFILE, profile: {} }))
+            .then(() => dispatch(commonActions.toggleLoading()))
     }
 }
 
@@ -65,12 +63,13 @@ export function updateProfile(profileData, history) {
 
 export function getProfileByHandle(handle) {
     return function(dispatch) {
-        dispatch(setProfileLoading())
+        dispatch(commonActions.toggleLoading())
         axios
             .get(`/api/profile/handle/${handle}`)
-            .then(res =>
+            .then(res => {
                 dispatch({ type: GET_USER_PROFILE, profile: res.data })
-            )
+                dispatch(commonActions.toggleLoading())
+            })
             .catch(err =>
                 dispatch({ type: GET_ERRORS, payload: err.response.data })
             )

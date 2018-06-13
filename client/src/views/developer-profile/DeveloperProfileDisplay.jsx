@@ -9,6 +9,7 @@ import ListAuto from '../../components/common/ListAuto'
 import CenteredContainer from '../../components/layout/CenteredContainer'
 
 import { getSafe } from '../../utils/utilFunctions'
+import isEmpty from '../../validation/is-empty'
 
 class DeveloperProfileDisplay extends Component {
     constructor() {
@@ -18,12 +19,13 @@ class DeveloperProfileDisplay extends Component {
             profile: {
                 experience: [],
                 education: []
-            }
+            },
+            repos: []
         }
     }
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        const { userProfile } = nextProps
+    static getDerivedStateFromProps(props, state) {
+        const { userProfile } = props
 
         let derivedState = {
             ...userProfile
@@ -32,17 +34,47 @@ class DeveloperProfileDisplay extends Component {
         return derivedState
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        // console.log('prevProps', prevProps)
+        // console.log('prevState', prevState)
+        // console.log('snapshot', snapshot)
+        if (
+            isEmpty(prevProps.userProfile.profile) &&
+            isEmpty(this.props.userProfile.profile)
+        ) {
+            console.log('Farts')
+            // this.props.history.push('/not-found')
+        }
+    }
+
     componentDidMount() {
         const { userProfileActions, match } = this.props
         userProfileActions.getProfileByHandle(match.params.handle)
 
-        // NEEDS REFACTOR
-        // userProfileActions.getGitHubRepos(match.params.handle)
+        // NEEDS REFACTOR - USE ACTION
+        const config = {
+            handle: match.params.handle,
+            clientId: 'f9afc36db9e5d334efff',
+            clientSecret: 'bff5a5a90e3d14e8337c8954c557662307fec3d8',
+            count: 3,
+            sort: 'created: asc'
+        }
+
+        fetch(
+            `https://api.github.com/users/${config.handle}/repos?per_page=${
+                config.count
+            }&sort=${config.sort}&client_id=${config.clientId}&client_secret=${
+                config.clientSecret
+            }`
+        )
+            .then(res => res.json())
+            .then(data => this.setState({ repos: data }))
+            .catch(err => console.log(err))
     }
 
     render() {
         const { match } = this.props
-        const { profile } = this.state
+        const { profile, repos } = this.state
 
         const experienceArr = profile.experience.reduce((acc, cur, idx) => {
             const tempArr = []
@@ -92,8 +124,16 @@ class DeveloperProfileDisplay extends Component {
 
         const avatarUrl = getSafe(() => profile.user.avatar)
 
+        const mappedRepos = repos.map(repo => (
+            <li key={repo.name}>
+                <a href={repo.html_url}>{repo.name}</a>
+            </li>
+        ))
+
         const gitHubCard = (
-            <DeveloperProfileCard title="Repos">The Repos</DeveloperProfileCard>
+            <DeveloperProfileCard title="Repos">
+                <ul className="unstyled">{mappedRepos}</ul>
+            </DeveloperProfileCard>
         )
         const showGitHubRepos = getSafe(() => profile.githubusername)
             ? gitHubCard
