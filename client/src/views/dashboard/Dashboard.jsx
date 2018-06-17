@@ -48,13 +48,13 @@ class Dashboard extends Component {
             dashboardContent = <Spinner />
         } else {
             // Check if logged in user has profile data
-            if (!isEmpty(userProfile)) {
+            if (isEmpty(userProfile.profile)) {
+                // User is logged in but has no profile
+                dashboardContent = <DashboardProfileNone />
+            } else {
                 dashboardContent = (
                     <DashboardProfileActive profile={userProfile.profile} />
                 )
-            } else {
-                // User is logged in but has no profile
-                dashboardContent = <DashboardProfileNone />
             }
         }
 

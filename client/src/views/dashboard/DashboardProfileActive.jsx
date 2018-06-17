@@ -29,16 +29,6 @@ class DashboardProfileActive extends Component {
         this.deleteProfile = this.deleteProfile.bind(this)
     }
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        const { profile } = nextProps
-
-        let derivedState = {
-            profile
-        }
-
-        return derivedState
-    }
-
     deleteExperience(e) {
         const { id } = e.target
         const { userProfileActions } = this.props
@@ -60,7 +50,7 @@ class DashboardProfileActive extends Component {
     }
 
     render() {
-        const { profile } = this.state
+        const { profile } = this.props
 
         const experienceTable = (
             <ExperienceDisplay
@@ -132,6 +122,13 @@ class DashboardProfileActive extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    const { profile } = state.userProfile
+    return {
+        profile
+    }
+}
+
 function mapDispatchToProps(dispatch) {
     return {
         userProfileActions: bindActionCreators(userProfileActions, dispatch)
@@ -139,6 +136,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(DashboardProfileActive)
