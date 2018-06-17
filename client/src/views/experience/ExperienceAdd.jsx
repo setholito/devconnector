@@ -90,7 +90,6 @@ class ExperienceAdd extends Component {
     render() {
         const {
             company,
-            current,
             description,
             disabled,
             errors,

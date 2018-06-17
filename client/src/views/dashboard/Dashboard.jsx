@@ -40,8 +40,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { errors, loading, userProfile } = this.props
-        const { user } = this.props.auth
+        const { loading, userProfile } = this.props
 
         let dashboardContent
 

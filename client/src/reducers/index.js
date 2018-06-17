@@ -5,6 +5,7 @@ import developerProfileReducer from './developerProfileReducer'
 import developerReducer from './developerReducer'
 import errorReducer from './errorReducer'
 import loadingReducer from './loadingReducer'
+import postReducer from './postReducer'
 import userProfileReducer from './userProfileReducer'
 
 export default combineReducers({
@@ -13,5 +14,6 @@ export default combineReducers({
     developers: developerReducer,
     errors: errorReducer,
     loading: loadingReducer,
+    post: postReducer,
     userProfile: userProfileReducer
 })

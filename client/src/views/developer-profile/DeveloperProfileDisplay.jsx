@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import * as userProfileActions from '../../actions/userProfileActions'
 
@@ -9,7 +8,6 @@ import ListAuto from '../../components/common/ListAuto'
 import CenteredContainer from '../../components/layout/CenteredContainer'
 
 import { getSafe } from '../../utils/utilFunctions'
-import isEmpty from '../../validation/is-empty'
 
 class DeveloperProfileDisplay extends Component {
     constructor() {

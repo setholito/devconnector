@@ -2,12 +2,10 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import format from 'date-fns/format'
 
 import ExperienceDisplay from '../experience/ExperienceDisplay'
 import EducationDisplay from '../education/EducationDisplay'
 
-import Card from '../../components/common/Card'
 import Button from '../../components/elements/Button'
 
 import * as userProfileActions from '../../actions/userProfileActions'
@@ -63,7 +61,6 @@ class DashboardProfileActive extends Component {
 
     render() {
         const { profile } = this.state
-        const { userProfileActions, deleteProfile } = this.props
 
         const experienceTable = (
             <ExperienceDisplay

@@ -18,7 +18,7 @@ function DeveloperCard({ dev }) {
                     <div className="column is-4">
                         <img
                             src={dev.user.avatar}
-                            alt={`${dev.handle}'s profile picture'`}
+                            alt={`${dev.handle}'s profile'`}
                         />
                     </div>
                     <div className="column is-8">

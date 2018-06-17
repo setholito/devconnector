@@ -1,10 +1,5 @@
 import React, { Component } from 'react'
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch,
-    Redirect
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
 import jwtDecode from 'jwt-decode'
@@ -34,6 +29,8 @@ import AuthRegister from './views/auth/AuthRegister'
 
 import DeveloperProfileDisplay from './views/developer-profile/DeveloperProfileDisplay'
 import Developers from './views/developers/Developers'
+
+import FeedContainer from './views/feed/FeedContainer'
 
 import NotFound from './views/system/NotFound'
 
@@ -96,6 +93,11 @@ class App extends Component {
                                     component={Developers}
                                     exact
                                     path={Url.DEVELOPERS}
+                                />
+                                <PrivateRoute
+                                    component={FeedContainer}
+                                    exact
+                                    path={Url.FEED}
                                 />
                                 <PrivateRoute
                                     component={Dashboard}

@@ -89,7 +89,6 @@ class AddEducation extends Component {
 
     render() {
         const {
-            current,
             degree,
             description,
             disableToField,
@@ -199,6 +198,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-    withRouter(AddEducation)
-)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(AddEducation))

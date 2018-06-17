@@ -3,9 +3,11 @@ import { CLEAR_ERRORS, GET_ERRORS } from '../actions/actionTypes'
 const initialState = {}
 
 export default function(state = initialState, action) {
-    switch (action.type) {
+    const { payload, type } = action
+
+    switch (type) {
         case GET_ERRORS:
-            return action.payload
+            return payload
 
         case CLEAR_ERRORS:
             return initialState

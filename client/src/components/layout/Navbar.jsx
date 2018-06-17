@@ -51,7 +51,10 @@ class Navbar extends Component {
                     {Content.DASHBOARD_HEADING}
                 </Link>
                 <Link to={Url.DEVELOPERS} className="navbar-item">
-                    Developers
+                    {Content.DEVELOPERS_LINK_TEXT}
+                </Link>
+                <Link to={Url.FEED} className="navbar-item">
+                    {Content.FEED_LINK_TEXT}
                 </Link>
             </div>
         )

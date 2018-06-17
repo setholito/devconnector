@@ -1,11 +1,9 @@
 import axios from 'axios'
 import {
-    GET_CURRENT_PROFILE,
     CLEAR_CURRENT_PROFILE,
     CLEAR_ERRORS,
     GET_ERRORS,
     GET_USER_PROFILE,
-    TOGGLE_LOADING,
     SET_CURRENT_USER
 } from './actionTypes'
 import * as commonActions from './commonActions'

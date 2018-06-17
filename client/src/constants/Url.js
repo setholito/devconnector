@@ -18,5 +18,7 @@ export default {
 
     DEVELOPERS: '/developers',
 
+    FEED: '/feed',
+
     NOT_FOUND: '/not-found'
 }

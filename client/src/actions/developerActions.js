@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { GET_ALL_DEVELOPERS, GET_ERRORS, TOGGLE_LOADING } from './actionTypes'
-import Url from '../constants/Url'
+import { GET_ALL_DEVELOPERS, GET_ERRORS } from './actionTypes'
 import * as commonActions from './commonActions'
 
 export function getDevelopers() {

@@ -26,6 +26,12 @@ export default {
     NO_PROFILE: 'You have not created a profile.',
     CREATE_PROFILE_CTA: 'Create Profile',
 
+    // DEVELOPERS ==========
+    DEVELOPERS_LINK_TEXT: 'Developers',
+
+    // FEED ==========
+    FEED_LINK_TEXT: 'Feed',
+
     // INPUTS ==========
     REQUIRED_LABEL: '- Required',
     OPTIONAL_LABEL: '- Optional',
