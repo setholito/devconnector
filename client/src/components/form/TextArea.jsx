@@ -11,7 +11,9 @@ class TextArea extends Component {
 
     handleTextChange(e) {
         const { name, value } = e.target
-        this.props.onTextChange(name, value)
+        const { onTextChange } = this.props
+
+        onTextChange(name, value)
     }
 
     render() {
@@ -31,6 +33,7 @@ class TextArea extends Component {
         const hasErrorText = errorText ? (
             <p className="help is-danger">{errorText}</p>
         ) : null
+
         const dynamicText = errorText ? hasErrorText : hasHelpText
         const showRequired = required ? (
             <span className="required">{Content.REQUIRED_LABEL}</span>
@@ -59,8 +62,10 @@ class TextArea extends Component {
 
 TextArea.propTypes = {
     id: PropTypes.string,
+    label: PropTypes.string,
     name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    value: PropTypes.string
 }
 
 export default TextArea

@@ -1,13 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function Button({ className, id, onClick, text, type }) {
+function Button({ className, id, onClick, text, type, ...others }) {
     return (
         <button
             id={id}
             className={`button ${className}`}
             type={type}
             onClick={onClick}
+            {...others}
         >
             {text}
         </button>

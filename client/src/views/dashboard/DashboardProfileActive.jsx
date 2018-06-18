@@ -11,6 +11,7 @@ import Button from '../../components/elements/Button'
 import * as userProfileActions from '../../actions/userProfileActions'
 
 import Url from '../../constants/Url'
+import Content from '../../constants/Content'
 
 class DashboardProfileActive extends Component {
     constructor(props) {
@@ -63,7 +64,7 @@ class DashboardProfileActive extends Component {
             profile.experience.length > 0 ? (
                 experienceTable
             ) : (
-                <h5 className="title is-5 faded">No Experience.</h5>
+                <h5 className="title is-5 faded">{Content.NO_EXPERIENCE}</h5>
             )
 
         const educationTable = (
@@ -77,7 +78,7 @@ class DashboardProfileActive extends Component {
             profile.education.length > 0 ? (
                 educationTable
             ) : (
-                <h5 className="title is-5 faded">No Education.</h5>
+                <h5 className="title is-5 faded">{Content.NO_EDUCATION}</h5>
             )
 
         return (

@@ -3,7 +3,8 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 export const GET_ERRORS = 'GET_ERRORS'
 
 // LOADING ==========
-export const TOGGLE_LOADING = 'TOGGLE_LOADING'
+export const LOADING_STATUS_ON = 'LOADING_STATUS_ON'
+export const LOADING_STATUS_OFF = 'LOADING_STATUS_OFF'
 
 // USER  ==========
 export const SET_CURRENT_USER = 'SET_CURRENT_USER'

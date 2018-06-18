@@ -7,7 +7,7 @@ export default function(state = initialState, action) {
 
     switch (type) {
         case GET_ERRORS:
-            return payload
+            return { ...payload }
 
         case CLEAR_ERRORS:
             return initialState

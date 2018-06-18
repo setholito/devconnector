@@ -1,4 +1,8 @@
 export default {
+    // BUTTONS ==========
+    COMMENT_BUTTON: 'Comment',
+    DELETE_BUTTON: 'Delete',
+
     // SITE ==========
     SITE_TITLE: 'DevConnector',
 
@@ -24,6 +28,8 @@ export default {
     // DASHBOARD ==========
     DASHBOARD_HEADING: 'Dashboard',
     NO_PROFILE: 'You have not created a profile.',
+    NO_EXPERIENCE: 'No Experience.',
+    NO_EDUCATION: 'No Education.',
     CREATE_PROFILE_CTA: 'Create Profile',
 
     // DEVELOPERS ==========
@@ -40,5 +46,11 @@ export default {
     ADD_EXPERIENCE_HEADING: 'Add Experience',
 
     // EDUCATION ==========
-    ADD_EDUCATION_HEADING: 'Add Education'
+    ADD_EDUCATION_HEADING: 'Add Education',
+
+    // FEED ==========
+    FEED_DATE: 'Date',
+    FEED_COMMENTS: 'Comments',
+    FEED_LIKES: 'Likes',
+    FEED_CONTENT: 'Content'
 }

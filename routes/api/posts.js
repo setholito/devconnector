@@ -51,8 +51,7 @@ router.delete(
                     }
 
                     // Delete
-                    post
-                        .remove()
+                    post.remove()
                         .then(() => res.json({ success: true }))
                         .catch(err =>
                             res

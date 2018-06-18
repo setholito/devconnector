@@ -4,7 +4,7 @@ import * as commonActions from './commonActions'
 
 export function getDevelopers() {
     return function(dispatch) {
-        dispatch(commonActions.toggleLoading())
+        dispatch(commonActions.loadingStatusOn())
         axios
             .get('/api/profile/developers')
             .then(res => {
@@ -13,6 +13,6 @@ export function getDevelopers() {
             .catch(err =>
                 dispatch({ type: GET_ERRORS, payload: err.response.data })
             )
-            .then(() => dispatch(commonActions.toggleLoading()))
+            .then(() => dispatch(commonActions.loadingStatusOff()))
     }
 }
