@@ -117,6 +117,7 @@ class FeedContainer extends Component {
             <SectionSplitter
                 left={
                     <Fragment>
+                        <h1 className="title is-1">Feed</h1>
                         <div className="box">
                             <form onSubmit={this.onFormSubmit}>
                                 <TextAreaCharCount
@@ -136,12 +137,7 @@ class FeedContainer extends Component {
                         </div>
                     </Fragment>
                 }
-                right={
-                    <Fragment>
-                        <h1 className="title is-1">Posts</h1>
-                        {toggleLoaderMappedCards}
-                    </Fragment>
-                }
+                right={toggleLoaderMappedCards}
             />
         )
     }
