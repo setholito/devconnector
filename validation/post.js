@@ -7,7 +7,7 @@ module.exports = function validatePostInput(data) {
     data.text = !isEmpty(data.text) ? data.text : ''
 
     // Text Validation ====================
-    const postMinChars = 10
+    const postMinChars = 2
     const postMaxChars = 280
 
     if (

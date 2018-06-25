@@ -15,22 +15,19 @@ export default function(state = initialState, action) {
 
     switch (type) {
         case ADD_POST:
-            return { ...state, posts: [...state.posts, payload] }
-            break
+            return { ...state, posts: [payload, ...state.posts] }
 
         case GET_POST:
-            break
+            return
 
         case GET_POSTS:
             return { ...state, posts: payload }
-            break
 
         case DELETE_POST:
-            const filteredPosts = state.posts.filter(
-                (post, idx) => idx !== action.index
-            )
+            const filteredPosts = state.posts.filter((post, idx) => {
+                return idx !== action.payload
+            })
             return { posts: filteredPosts }
-            break
 
         default:
             return state

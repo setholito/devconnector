@@ -18,7 +18,6 @@ class Developers extends Component {
     render() {
         const { developers, loading } = this.props
 
-        const showLoader = loading.status ? <Spinner /> : null
         const mappedCards = developers.map((dev, idx) => {
             return (
                 <div key={idx} className="column is-4">
@@ -26,13 +25,17 @@ class Developers extends Component {
                 </div>
             )
         })
+        const toggleLoaderMappedCards = loading.status ? (
+            <Spinner />
+        ) : (
+            mappedCards
+        )
 
         return (
             <section className="section all-developers">
                 <h1 className="title is-1">Developers</h1>
                 <div className="columns is-multiline">
-                    {showLoader}
-                    {mappedCards}
+                    {toggleLoaderMappedCards}
                 </div>
             </section>
         )

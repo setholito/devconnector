@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     // BUTTONS ==========
     COMMENT_BUTTON: 'Comment',
     DELETE_BUTTON: 'Delete',

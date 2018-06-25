@@ -41,5 +41,6 @@ h2.faded,
 h3.faded,
 h4.faded,
 h5.faded,
-h6.faded {
+h6.faded,
+p.faded {
   color: #ccc; }

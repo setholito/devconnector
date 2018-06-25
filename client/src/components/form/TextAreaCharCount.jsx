@@ -25,9 +25,9 @@ class TextAreaCharCount extends Component {
 
     render() {
         const { maxNumChars } = this.state
-        const { errorText, id, label, name, onTextChange, value } = this.props
+        const { errorText, id, label, name, value } = this.props
 
-        const curNumChars = maxNumChars - this.props.value.length
+        const curNumChars = maxNumChars - value.length
 
         return (
             <TextArea

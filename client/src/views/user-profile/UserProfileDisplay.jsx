@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -6,7 +6,8 @@ import * as userProfileActions from '../../actions/userProfileActions'
 
 import UserProfileCard from './UserProfileCard'
 import ListAuto from '../../components/common/ListAuto'
-import CenteredContainer from '../../components/layout/CenteredContainer'
+import Section from '../../components/layout/Section'
+import SectionSplitter from '../../components/layout/SectionSplitter'
 
 import { getSafe } from '../../utils/utilFunctions'
 
@@ -94,32 +95,45 @@ class UserProfileDisplay extends Component {
         const avatarUrl = getSafe(() => userProfile.profile.user.avatar)
 
         return (
-            <section className="section display-profile">
-                <CenteredContainer>
+            <div>
+                <Section>
                     <h1 className="title is-1">Your Profile</h1>
                     <img
                         className="circle"
                         src={avatarUrl}
-                        alt="User Gravatar Image"
+                        alt="User Gravatar"
                     />
-                    <UserProfileCard title="Bio">{profile.bio}</UserProfileCard>
-                    <UserProfileCard title="Company">
-                        {profile.company}
-                    </UserProfileCard>
-                    <UserProfileCard title="Status">
-                        {profile.status}
-                    </UserProfileCard>
-                    <UserProfileCard title="Skills">
-                        {profile.skills}
-                    </UserProfileCard>
-                    <UserProfileCard title="Experience">
-                        {experienceArr}
-                    </UserProfileCard>
-                    <UserProfileCard title="Education">
-                        {educationArr}
-                    </UserProfileCard>
-                </CenteredContainer>
-            </section>
+                </Section>
+                <SectionSplitter
+                    className="display-profile"
+                    left={
+                        <Fragment>
+                            <UserProfileCard title="Bio">
+                                {profile.bio}
+                            </UserProfileCard>
+                            <UserProfileCard title="Company">
+                                {profile.company}
+                            </UserProfileCard>
+                            <UserProfileCard title="Status">
+                                {profile.status}
+                            </UserProfileCard>
+                        </Fragment>
+                    }
+                    right={
+                        <Fragment>
+                            <UserProfileCard title="Skills">
+                                {profile.skills}
+                            </UserProfileCard>
+                            <UserProfileCard title="Experience">
+                                {experienceArr}
+                            </UserProfileCard>
+                            <UserProfileCard title="Education">
+                                {educationArr}
+                            </UserProfileCard>
+                        </Fragment>
+                    }
+                />
+            </div>
         )
     }
 }

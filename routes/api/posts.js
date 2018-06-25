@@ -82,12 +82,12 @@ router.post(
             return res.status(400).json(errors)
         }
 
-        const { avatar, name, text } = req.body
+        const { avatar, handle, text } = req.body
         const { id: user } = req.user
 
         const newPost = new Post({
             avatar,
-            name,
+            handle,
             text,
             user
         })
@@ -180,12 +180,12 @@ router.post(
 
         Post.findById(req.params.id)
             .then(post => {
-                const { avatar, name, text } = req.body
+                const { avatar, handle, text } = req.body
                 const { id: user } = req.user
 
                 const newComment = {
                     avatar,
-                    name,
+                    handle,
                     text,
                     user
                 }

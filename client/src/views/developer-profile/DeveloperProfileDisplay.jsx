@@ -108,12 +108,15 @@ class DeveloperProfileDisplay extends Component {
         }, [])
 
         const avatarUrl = getSafe(() => profile.user.avatar)
+        let mappedRepos = null
 
-        const mappedRepos = repos.map(repo => (
-            <li key={repo.name}>
-                <a href={repo.html_url}>{repo.name}</a>
-            </li>
-        ))
+        if (repos.length > 0) {
+            mappedRepos = repos.map(repo => (
+                <li key={repo.name}>
+                    <a href={repo.html_url}>{repo.name}</a>
+                </li>
+            ))
+        }
 
         const gitHubCard = (
             <DeveloperProfileCard title="Repos">
@@ -133,7 +136,7 @@ class DeveloperProfileDisplay extends Component {
                     <img
                         className="circle"
                         src={avatarUrl}
-                        alt="User Gravatar Image"
+                        alt="User Gravatar"
                     />
                     <DeveloperProfileCard title="Bio">
                         {profile.bio}

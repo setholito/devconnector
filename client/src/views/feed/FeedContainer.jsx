@@ -1,21 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import * as postActions from '../../actions/postActions'
-
-import { getSafe } from '../../utils/utilFunctions'
-
-import format from 'date-fns/format'
+import * as userProfileActions from '../../actions/userProfileActions'
 
 import TextAreaCharCount from '../../components/form/TextAreaCharCount'
-import CenteredContainer from '../../components/layout/CenteredContainer'
-import Button from '../../components/elements/Button'
+import SectionSplitter from '../../components/layout/SectionSplitter'
 import Spinner from '../../components/common/Spinner'
+import Button from '../../components/elements/Button'
+import FeedPost from './FeedPost'
 
-import Content from '../../constants/Content'
 import isEmpty from '../../validation/is-empty'
 
 class FeedContainer extends Component {
@@ -48,8 +45,13 @@ class FeedContainer extends Component {
     }
 
     componentDidMount() {
-        const { postActions } = this.props
+        const { postActions, userProfile, userProfileActions } = this.props
         postActions.getPosts()
+
+        // NEEDS REFACTOR
+        if (isEmpty(userProfile)) {
+            userProfileActions.getCurrentProfile()
+        }
     }
 
     handleTextUpdate(name, text) {
@@ -59,14 +61,16 @@ class FeedContainer extends Component {
     onFormSubmit(e) {
         e.preventDefault()
 
-        const { auth, postActions } = this.props
+        const { auth, postActions, userProfile } = this.props
         const { newPost } = this.state
+        const { avatar, _id } = auth.user
+        const { handle } = userProfile.profile
 
         postActions.addPost({
-            avatar: auth.user.avatar,
-            name: '',
+            avatar,
+            handle,
             text: newPost,
-            user: ''
+            user: _id
         })
 
         this.setState({ newPost: '' })
@@ -77,7 +81,11 @@ class FeedContainer extends Component {
         const { postActions } = this.props
         const { id, dataset } = e.target
 
-        postActions.deletePost(id, dataset.index)
+        postActions.deletePost(id, Number(dataset.index))
+    }
+
+    onPostComment(e) {
+        e.preventDefault()
     }
 
     render() {
@@ -85,75 +93,35 @@ class FeedContainer extends Component {
         const { auth, loadingStatus, posts } = this.props
 
         const mappedPosts = posts.map((post, idx) => {
-            const showDelete =
-                auth.user.id === post.user ? (
-                    <Button
-                        className="is-small is-danger is-outlined"
-                        data-index={idx}
-                        id={post._id}
-                        onClick={this.onPostDelete}
-                        text={Content.DELETE_BUTTON}
-                    />
-                ) : null
-
             return (
-                <div key={idx} className="box">
-                    <div className="columns">
-                        <div className="column is-narrow">
-                            <img
-                                className="circle"
-                                src={post.avatar}
-                                width="50"
-                                height="50"
-                            />
-                        </div>
-                        <div className="column">
-                            <p>
-                                <strong>{Content.FEED_DATE}:</strong>{' '}
-                                {format(post.date, 'MM/DD/YYYY')}
-                            </p>
-                            <p>
-                                <strong>{Content.FEED_COMMENTS}:</strong>{' '}
-                                {post.comments.length}
-                            </p>
-                            <p>
-                                <strong>{Content.FEED_LIKES}:</strong>{' '}
-                                {post.likes.length}
-                            </p>
-                            <p className="spacer-bottom">
-                                <strong>{Content.FEED_CONTENT}:</strong>
-                                <br />
-                                {post.text}
-                            </p>
-                            <div className="field is-grouped">
-                                <p className="control">
-                                    <Button
-                                        className="is-small is-info is-outlined"
-                                        data-index={idx}
-                                        id={post._id}
-                                        onClick={this.onPostDelete}
-                                        text={Content.COMMENT_BUTTON}
-                                    />
-                                </p>
-                                <p className="control">{showDelete}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <FeedPost
+                    key={post._id}
+                    auth={auth}
+                    post={post}
+                    index={idx}
+                    onClickDelete={this.onPostDelete}
+                    onClickComment={this.onPostComment}
+                />
             )
         })
 
-        const showSpinner = loadingStatus ? <Spinner /> : null
+        const toggleLoaderMappedCards = loadingStatus ? (
+            <Spinner />
+        ) : posts.length > 0 ? (
+            mappedPosts
+        ) : (
+            <p className="faded">There are no posts. You should write one.</p>
+        )
 
         return (
-            <section className="section feed-container">
-                <div className="columns">
-                    <div className="column is-4">
+            <SectionSplitter
+                left={
+                    <Fragment>
                         <div className="box">
                             <form onSubmit={this.onFormSubmit}>
                                 <TextAreaCharCount
                                     errorText={errors.text}
-                                    label="Post Something"
+                                    label="Write a new post:"
                                     maxLength={280}
                                     name="newPost"
                                     onTextChange={this.handleTextUpdate}
@@ -161,18 +129,20 @@ class FeedContainer extends Component {
                                 />
                                 <Button
                                     className="is-primary"
-                                    text="Post"
+                                    text="Add Post"
                                     type="submit"
                                 />
                             </form>
                         </div>
-                    </div>
-                    <div className="column is-8">
-                        {showSpinner}
-                        {mappedPosts}
-                    </div>
-                </div>
-            </section>
+                    </Fragment>
+                }
+                right={
+                    <Fragment>
+                        <h1 className="title is-1">Posts</h1>
+                        {toggleLoaderMappedCards}
+                    </Fragment>
+                }
+            />
         )
     }
 }
@@ -184,14 +154,16 @@ FeedContainer.propTypes = {
 }
 
 function mapStateToProps(state) {
-    const { auth, errors, loading, post } = state
+    const { auth, errors, loading, post, userProfile } = state
 
     const { status: loadingStatus } = loading
+    // NEEDS REFACTOR
     const { posts } = post
 
     return {
         auth,
         loadingStatus,
+        userProfile,
         errors,
         posts
     }
@@ -199,7 +171,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        postActions: bindActionCreators(postActions, dispatch)
+        postActions: bindActionCreators(postActions, dispatch),
+        userProfileActions: bindActionCreators(userProfileActions, dispatch)
     }
 }
 

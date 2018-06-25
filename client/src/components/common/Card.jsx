@@ -1,15 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function Card({ cardLinks, children, className, title }) {
-    const footerLinks = cardLinks.map((item, idx) => {
-        return (
-            <a href={item.link} className="card-footer-item">
-                {item.text}
-            </a>
-        )
-    })
-
+function Card({ cardLinks, children, className, footer, title }) {
     return (
         <div className={`card ${className}`}>
             <header className="card-header">
@@ -18,7 +10,7 @@ function Card({ cardLinks, children, className, title }) {
             <div className="card-content">
                 <div className="content">{children}</div>
             </div>
-            <footer className="card-footer">{footerLinks}</footer>
+            <footer className="card-footer">{footer}</footer>
         </div>
     )
 }
