@@ -17,7 +17,7 @@ import Constants from '../../constants/Constants'
 
 import Button from '../../components/elements/Button'
 
-class EditProfile extends Component {
+class UserProfileEdit extends Component {
     constructor() {
         super()
 
@@ -262,7 +262,7 @@ class EditProfile extends Component {
     }
 }
 
-EditProfile.propTypes = {
+UserProfileEdit.propTypes = {
     errors: PropTypes.object.isRequired,
     userProfile: PropTypes.object.isRequired
 }
@@ -285,4 +285,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withRouter(EditProfile))
+)(withRouter(UserProfileEdit))
