@@ -44,3 +44,8 @@ h5.faded,
 h6.faded,
 p.faded {
   color: #ccc; }
+
+ul.comment-list li {
+  margin-bottom: 0.75em; }
+  ul.comment-list li:first-child {
+    margin-top: 1em; }

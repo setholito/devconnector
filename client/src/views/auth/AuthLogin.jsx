@@ -49,6 +49,7 @@ class AuthLogin extends Component {
 
     handleSubmit(e) {
         e.preventDefault()
+
         const { authActions } = this.props
         const { email, password } = this.state
 

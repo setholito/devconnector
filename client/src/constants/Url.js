@@ -1,6 +1,6 @@
 const basePath = '/'
 
-export default {
+module.exports = {
     USER_PROFILE_DISPLAY: '/profile',
     USER_PROFILE_CREATE: '/create-profile',
     USER_PROFILE_EDIT: '/edit-profile',
@@ -19,6 +19,8 @@ export default {
     DEVELOPERS: '/developers',
 
     FEED: '/feed',
+
+    POST_DISPLAY: '/post/:id',
 
     NOT_FOUND: '/not-found'
 }

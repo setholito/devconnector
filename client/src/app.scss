@@ -59,3 +59,13 @@ p {
         color: #ccc;
     }
 }
+
+ul.comment-list {
+    li {
+        margin-bottom: 0.75em;
+
+        &:first-child {
+            margin-top: 1em;
+        }
+    }
+}

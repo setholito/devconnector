@@ -1,19 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import format from 'date-fns/format'
+import { Link } from 'react-router-dom'
 
 import Button from '../../components/elements/Button'
 import Card from '../../components/common/Card'
 import {
     COMMENT_BUTTON,
     DELETE_BUTTON,
-    FEED_COMMENTS,
-    FEED_CONTENT,
-    FEED_DATE,
-    FEED_LIKES
+    LIKE_BUTTON_TEXT,
+    LIKED_BUTTON_TEXT
 } from '../../constants/Content'
 
-function FeedPost({ auth, index, post, onClickDelete, onClickComment }) {
+function FeedPost({
+    auth,
+    index,
+    isLiked,
+    post,
+    onClickComment,
+    onClickDelete,
+    onClickLike,
+    onClickUnLike
+}) {
     const showDelete =
         auth.user.id === post.user ? (
             <Button
@@ -24,6 +32,7 @@ function FeedPost({ auth, index, post, onClickDelete, onClickComment }) {
                 text={DELETE_BUTTON}
             />
         ) : null
+    const dynamicLike = isLiked ? LIKED_BUTTON_TEXT : LIKE_BUTTON_TEXT
 
     return (
         <Card className="spacer-bottom" title={`${post.handle} posted:`}>
@@ -38,32 +47,29 @@ function FeedPost({ auth, index, post, onClickDelete, onClickComment }) {
                     />
                 </div>
                 <div className="column">
-                    <p className="spacer-bottom">
-                        <strong>{FEED_CONTENT}:</strong>
-                        <br />
-                        {post.text}
-                    </p>
-                </div>
-                <div className="column is-6">
-                    <p>
-                        <strong>{FEED_DATE}:</strong>{' '}
-                        {format(post.date, 'MM/DD/YYYY')}
-                    </p>
-                    <p>
-                        <strong>{FEED_COMMENTS}:</strong> {post.comments.length}
-                    </p>
-                    <p>
-                        <strong>{FEED_LIKES}:</strong> {post.likes.length}
-                    </p>
+                    <p>{format(post.date, 'MM/DD/YYYY - hh:mm A')}</p>
+                    <p className="spacer-bottom">{post.text}</p>
                     <div className="field is-grouped">
                         <p className="control">
-                            <Button
-                                className="is-small is-info is-outlined"
-                                data-index={index}
+                            <button
+                                className={`button is-small is-info ${
+                                    isLiked ? '' : 'is-outlined'
+                                }`}
+                                onClick={isLiked ? onClickUnLike : onClickLike}
                                 id={post._id}
-                                onClick={onClickComment}
-                                text={COMMENT_BUTTON}
-                            />
+                                to={`/likes/${post._id}`}
+                            >
+                                {dynamicLike} {post.likes.length}
+                            </button>
+                        </p>
+                        <p className="control">
+                            <Link
+                                id={post._id}
+                                to={`/post/${post._id}`}
+                                className="button is-small is-success is-outlined"
+                            >
+                                {COMMENT_BUTTON} {post.comments.length}
+                            </Link>
                         </p>
                         <p className="control">{showDelete}</p>
                     </div>

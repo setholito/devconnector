@@ -26,8 +26,11 @@ class FeedContainer extends Component {
         }
 
         this.handleTextUpdate = this.handleTextUpdate.bind(this)
-        this.onFormSubmit = this.onFormSubmit.bind(this)
-        this.onPostDelete = this.onPostDelete.bind(this)
+        this.formSubmit = this.formSubmit.bind(this)
+        this.postComment = this.postComment.bind(this)
+        this.postDelete = this.postDelete.bind(this)
+        this.postLike = this.postLike.bind(this)
+        this.postUnLike = this.postUnLike.bind(this)
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -58,7 +61,7 @@ class FeedContainer extends Component {
         this.setState({ [name]: text })
     }
 
-    onFormSubmit(e) {
+    formSubmit(e) {
         e.preventDefault()
 
         const { auth, postActions, userProfile } = this.props
@@ -76,7 +79,11 @@ class FeedContainer extends Component {
         this.setState({ newPost: '' })
     }
 
-    onPostDelete(e) {
+    postComment(e) {
+        e.preventDefault('Comment!')
+    }
+
+    postDelete(e) {
         e.preventDefault()
         const { postActions } = this.props
         const { id, dataset } = e.target
@@ -84,8 +91,20 @@ class FeedContainer extends Component {
         postActions.deletePost(id, Number(dataset.index))
     }
 
-    onPostComment(e) {
+    postLike(e) {
         e.preventDefault()
+        const { id } = e.target
+        const { postActions } = this.props
+
+        postActions.likePost(id)
+    }
+
+    postUnLike(e) {
+        e.preventDefault()
+        const { id } = e.target
+        const { postActions } = this.props
+
+        postActions.unLikePost(id)
     }
 
     render() {
@@ -93,14 +112,21 @@ class FeedContainer extends Component {
         const { auth, loadingStatus, posts } = this.props
 
         const mappedPosts = posts.map((post, idx) => {
+            const postLiked = post.likes.some(like => {
+                return like.user === auth.user.id
+            })
+
             return (
                 <FeedPost
                     key={post._id}
                     auth={auth}
                     post={post}
                     index={idx}
-                    onClickDelete={this.onPostDelete}
-                    onClickComment={this.onPostComment}
+                    onClickComment={this.postComment}
+                    onClickDelete={this.postDelete}
+                    onClickLike={this.postLike}
+                    onClickUnLike={this.postUnLike}
+                    isLiked={postLiked}
                 />
             )
         })
@@ -110,7 +136,11 @@ class FeedContainer extends Component {
         ) : posts.length > 0 ? (
             mappedPosts
         ) : (
-            <p className="faded">There are no posts. You should write one.</p>
+            <div className="box">
+                <h5 className="title is-5 faded">
+                    There are no posts. You should write one.
+                </h5>
+            </div>
         )
 
         return (
@@ -119,7 +149,7 @@ class FeedContainer extends Component {
                     <Fragment>
                         <h1 className="title is-1">Feed</h1>
                         <div className="box">
-                            <form onSubmit={this.onFormSubmit}>
+                            <form onSubmit={this.formSubmit}>
                                 <TextAreaCharCount
                                     errorText={errors.text}
                                     label="Write a new post:"
