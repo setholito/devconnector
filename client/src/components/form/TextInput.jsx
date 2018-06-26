@@ -10,8 +10,10 @@ class TextInput extends Component {
     }
 
     handleTextChange(e) {
+        const { onTextChange } = this.props
         const { name, value } = e.target
-        this.props.onTextChange(name, value)
+
+        onTextChange(name, value)
     }
 
     render() {
