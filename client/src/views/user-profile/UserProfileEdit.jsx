@@ -28,20 +28,17 @@ class EditProfile extends Component {
             location: '',
             skills: '',
             status: '',
-
             website: '',
             githubusername: '',
-
             facebook: '',
             instagram: '',
             linkedin: '',
             twitter: '',
             youtube: '',
-
             errors: {}
         }
 
-        this.updateProfileState = this.updateProfileState.bind(this)
+        this.handleTextUpdate = this.handleTextUpdate.bind(this)
         this.sendProfileUpdate = this.sendProfileUpdate.bind(this)
     }
 
@@ -78,8 +75,8 @@ class EditProfile extends Component {
         userProfileActions.getCurrentProfile()
     }
 
-    updateProfileState(name, value) {
-        this.setState({ [name]: value })
+    handleTextUpdate(name, text) {
+        this.setState({ [name]: text })
     }
 
     sendProfileUpdate(e) {
@@ -151,7 +148,7 @@ class EditProfile extends Component {
                                 errorText={errors.handle}
                                 label="Handle"
                                 name="handle"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextUpdate}
                                 required
                                 value={handle}
                             />
@@ -159,21 +156,21 @@ class EditProfile extends Component {
                                 errorText={errors.bio}
                                 label="Bio"
                                 name="bio"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextUpdate}
                                 value={bio}
                             />
                             <TextInput
                                 errorText={errors.company}
                                 label="Company"
                                 name="company"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextUpdate}
                                 value={company}
                             />
                             <TextInput
                                 errorText={errors.location}
                                 label="Location"
                                 name="location"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextUpdate}
                                 value={location}
                             />
                             <hr />
@@ -182,7 +179,7 @@ class EditProfile extends Component {
                                 helpText="Must be comma separated."
                                 label="Skills"
                                 name="skills"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextUpdate}
                                 required
                                 value={skills}
                             />
@@ -190,7 +187,7 @@ class EditProfile extends Component {
                                 errorText={errors.status}
                                 label="Status"
                                 name="status"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextUpdate}
                                 options={Constants.ARRAY_OF_STATUSES}
                                 required
                                 value={status}
@@ -200,14 +197,14 @@ class EditProfile extends Component {
                                 errorText={errors.website}
                                 label="Website URL"
                                 name="website"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextUpdate}
                                 value={website}
                             />
                             <TextInput
                                 errorText={errors.githubusername}
                                 label="GitHub Username"
                                 name="githubusername"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextUpdate}
                                 value={githubusername}
                             />
                             <hr />
@@ -215,7 +212,7 @@ class EditProfile extends Component {
                                 errorText={errors.facebook}
                                 label="Facebook"
                                 name="facebook"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextUpdate}
                                 optional
                                 value={facebook}
                             />
@@ -223,7 +220,7 @@ class EditProfile extends Component {
                                 errorText={errors.twitter}
                                 label="Twitter"
                                 name="twitter"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextUpdate}
                                 optional
                                 value={twitter}
                             />
@@ -231,7 +228,7 @@ class EditProfile extends Component {
                                 errorText={errors.instagram}
                                 label="Instagram"
                                 name="instagram"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextUpdate}
                                 optional
                                 value={instagram}
                             />
@@ -239,7 +236,7 @@ class EditProfile extends Component {
                                 errorText={errors.youtube}
                                 label="YouTube"
                                 name="youtube"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextUpdate}
                                 optional
                                 value={youtube}
                             />
@@ -247,7 +244,7 @@ class EditProfile extends Component {
                                 errorText={errors.linkedin}
                                 label="LinkedIn"
                                 name="linkedin"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextUpdate}
                                 optional
                                 value={linkedin}
                             />
