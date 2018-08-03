@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import Content from '../../constants/Content'
 
 class Select extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.handleSelectChange = this.handleSelectChange.bind(this)
     }

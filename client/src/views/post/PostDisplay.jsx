@@ -20,8 +20,8 @@ import { FEED } from '../../constants/Url'
 import { getSafe } from '../../utils/utilFunctions'
 
 class PostDisplay extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             errors: {},

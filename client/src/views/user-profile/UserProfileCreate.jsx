@@ -17,8 +17,8 @@ import Content from '../../constants/Content'
 import Constants from '../../constants/Constants'
 
 class CreateProfile extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             displaySocialInputs: false,

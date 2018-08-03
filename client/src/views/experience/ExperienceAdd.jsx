@@ -16,8 +16,8 @@ import Content from '../../constants/Content'
 import * as userProfileActions from '../../actions/userProfileActions'
 
 class ExperienceAdd extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             company: '',

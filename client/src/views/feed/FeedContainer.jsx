@@ -16,8 +16,8 @@ import FeedPost from './FeedPost'
 import isEmpty from '../../validation/is-empty'
 
 class FeedContainer extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             errors: {},

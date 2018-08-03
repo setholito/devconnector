@@ -15,8 +15,8 @@ import Spinner from '../../components/common/Spinner'
 import isEmpty from '../../validation/is-empty'
 
 class Dashboard extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             errors: {}

@@ -13,8 +13,8 @@ import Content from '../../constants/Content'
 import Url from '../../constants/Url'
 
 class Navbar extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             isOpen: false

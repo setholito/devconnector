@@ -12,8 +12,8 @@ import SectionSplitter from '../../components/layout/SectionSplitter'
 import { getSafe } from '../../utils/utilFunctions'
 
 class UserProfileDisplay extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             profile: {

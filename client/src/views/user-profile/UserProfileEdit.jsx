@@ -18,8 +18,8 @@ import Constants from '../../constants/Constants'
 import Button from '../../components/elements/Button'
 
 class UserProfileEdit extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             bio: '',
@@ -76,6 +76,8 @@ class UserProfileEdit extends Component {
     }
 
     handleTextChange(name, text) {
+        console.log('name', name)
+        console.log('text', text)
         this.setState({ [name]: text })
     }
 
