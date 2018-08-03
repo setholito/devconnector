@@ -38,7 +38,7 @@ class UserProfileEdit extends Component {
             errors: {}
         }
 
-        this.handleTextUpdate = this.handleTextUpdate.bind(this)
+        this.handleTextChange = this.handleTextChange.bind(this)
         this.sendProfileUpdate = this.sendProfileUpdate.bind(this)
     }
 
@@ -75,7 +75,7 @@ class UserProfileEdit extends Component {
         userProfileActions.getCurrentProfile()
     }
 
-    handleTextUpdate(name, text) {
+    handleTextChange(name, text) {
         this.setState({ [name]: text })
     }
 
@@ -148,7 +148,7 @@ class UserProfileEdit extends Component {
                                 errorText={errors.handle}
                                 label="Handle"
                                 name="handle"
-                                onTextChange={this.handleTextUpdate}
+                                onTextChange={this.handleTextChange}
                                 required
                                 value={handle}
                             />
@@ -156,21 +156,21 @@ class UserProfileEdit extends Component {
                                 errorText={errors.bio}
                                 label="Bio"
                                 name="bio"
-                                onTextChange={this.handleTextUpdate}
+                                onTextChange={this.handleTextChange}
                                 value={bio}
                             />
                             <TextInput
                                 errorText={errors.company}
                                 label="Company"
                                 name="company"
-                                onTextChange={this.handleTextUpdate}
+                                onTextChange={this.handleTextChange}
                                 value={company}
                             />
                             <TextInput
                                 errorText={errors.location}
                                 label="Location"
                                 name="location"
-                                onTextChange={this.handleTextUpdate}
+                                onTextChange={this.handleTextChange}
                                 value={location}
                             />
                             <hr />
@@ -179,7 +179,7 @@ class UserProfileEdit extends Component {
                                 helpText="Must be comma separated."
                                 label="Skills"
                                 name="skills"
-                                onTextChange={this.handleTextUpdate}
+                                onTextChange={this.handleTextChange}
                                 required
                                 value={skills}
                             />
@@ -187,7 +187,7 @@ class UserProfileEdit extends Component {
                                 errorText={errors.status}
                                 label="Status"
                                 name="status"
-                                onTextChange={this.handleTextUpdate}
+                                onTextChange={this.handleTextChange}
                                 options={Constants.ARRAY_OF_STATUSES}
                                 required
                                 value={status}
@@ -197,14 +197,14 @@ class UserProfileEdit extends Component {
                                 errorText={errors.website}
                                 label="Website URL"
                                 name="website"
-                                onTextChange={this.handleTextUpdate}
+                                onTextChange={this.handleTextChange}
                                 value={website}
                             />
                             <TextInput
                                 errorText={errors.githubusername}
                                 label="GitHub Username"
                                 name="githubusername"
-                                onTextChange={this.handleTextUpdate}
+                                onTextChange={this.handleTextChange}
                                 value={githubusername}
                             />
                             <hr />
@@ -212,7 +212,7 @@ class UserProfileEdit extends Component {
                                 errorText={errors.facebook}
                                 label="Facebook"
                                 name="facebook"
-                                onTextChange={this.handleTextUpdate}
+                                onTextChange={this.handleTextChange}
                                 optional
                                 value={facebook}
                             />
@@ -220,7 +220,7 @@ class UserProfileEdit extends Component {
                                 errorText={errors.twitter}
                                 label="Twitter"
                                 name="twitter"
-                                onTextChange={this.handleTextUpdate}
+                                onTextChange={this.handleTextChange}
                                 optional
                                 value={twitter}
                             />
@@ -228,7 +228,7 @@ class UserProfileEdit extends Component {
                                 errorText={errors.instagram}
                                 label="Instagram"
                                 name="instagram"
-                                onTextChange={this.handleTextUpdate}
+                                onTextChange={this.handleTextChange}
                                 optional
                                 value={instagram}
                             />
@@ -236,7 +236,7 @@ class UserProfileEdit extends Component {
                                 errorText={errors.youtube}
                                 label="YouTube"
                                 name="youtube"
-                                onTextChange={this.handleTextUpdate}
+                                onTextChange={this.handleTextChange}
                                 optional
                                 value={youtube}
                             />
@@ -244,7 +244,7 @@ class UserProfileEdit extends Component {
                                 errorText={errors.linkedin}
                                 label="LinkedIn"
                                 name="linkedin"
-                                onTextChange={this.handleTextUpdate}
+                                onTextChange={this.handleTextChange}
                                 optional
                                 value={linkedin}
                             />

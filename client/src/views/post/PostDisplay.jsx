@@ -62,14 +62,14 @@ class PostDisplay extends Component {
     }
 
     deleteComment(e) {
-        const { id, dataset } = e.target
+        const { id } = e.target
         const { match, postActions } = this.props
 
         postActions.deleteComment(match.params.id, id)
     }
 
     render() {
-        const { auth, loadingStatus, post } = this.props
+        const { loadingStatus, post } = this.props
         const { errors, newComment } = this.state
 
         const postComp = (
@@ -142,9 +142,12 @@ class PostDisplay extends Component {
     }
 }
 
-PostDisplay.defaultProps = {}
-
-PostDisplay.propTypes = {}
+PostDisplay.propTypes = {
+    auth: PropTypes.object,
+    loadingStatus: PropTypes.boolean,
+    post: PropTypes.object,
+    userProfile: PropTypes.object
+}
 
 function mapStateToProps(state) {
     const { auth, userProfile } = state
