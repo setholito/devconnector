@@ -14,8 +14,8 @@ import Url from './constants/Url'
 import AuthLogin from './views/auth/AuthLogin'
 
 import UserProfileCreate from './views/user-profile/UserProfileCreate'
-import UserProfileEdit from './views/user-profile/UserProfileEdit'
 import UserProfileDisplay from './views/user-profile/UserProfileDisplay'
+import UserProfileEdit from './views/user-profile/UserProfileEdit'
 
 import Dashboard from './views/dashboard/Dashboard'
 import EducationAdd from './views/education/EducationAdd'
