@@ -44,15 +44,20 @@ class UserProfileEdit extends Component {
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const { errors, userProfile } = nextProps
-        const { profile } = userProfile
+        const { profile = {} } = userProfile
 
-        let derivedState = {}
+        let derivedState = {
+            handle: profile.handle,
+            bio: profile.bio,
+            company: profile.company,
+            location: profile.location,
+            website: profile.website,
+            githubusername: profile.githubusername
+        }
 
         if (errors) {
             derivedState.errors = errors
         }
-
-        derivedState = Object.assign({}, derivedState, profile)
 
         if (profile && profile.skills) {
             derivedState.skills = profile.skills.join(',')
@@ -76,8 +81,6 @@ class UserProfileEdit extends Component {
     }
 
     handleTextChange(name, text) {
-        console.log('name', name)
-        console.log('text', text)
         this.setState({ [name]: text })
     }
 
