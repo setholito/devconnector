@@ -16,8 +16,8 @@ import Content from '../../constants/Content'
 import * as userProfileActions from '../../actions/userProfileActions'
 
 class AddEducation extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             current: false,

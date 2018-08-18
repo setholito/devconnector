@@ -14,8 +14,8 @@ import Url from './constants/Url'
 import AuthLogin from './views/auth/AuthLogin'
 
 import UserProfileCreate from './views/user-profile/UserProfileCreate'
-import UserProfileEdit from './views/user-profile/UserProfileEdit'
 import UserProfileDisplay from './views/user-profile/UserProfileDisplay'
+import UserProfileEdit from './views/user-profile/UserProfileEdit'
 
 import Dashboard from './views/dashboard/Dashboard'
 import EducationAdd from './views/education/EducationAdd'
@@ -31,6 +31,8 @@ import DeveloperProfileDisplay from './views/developer-profile/DeveloperProfileD
 import Developers from './views/developers/Developers'
 
 import FeedContainer from './views/feed/FeedContainer'
+
+import PostDisplay from './views/post/PostDisplay'
 
 import NotFound from './views/system/NotFound'
 
@@ -128,6 +130,11 @@ class App extends Component {
                                     component={ExperienceAdd}
                                     exact
                                     path={Url.ADD_EXPERIENCE}
+                                />
+                                <PrivateRoute
+                                    component={PostDisplay}
+                                    exact
+                                    path={Url.POST_DISPLAY}
                                 />
                                 <Route
                                     path={Url.NOT_FOUND}

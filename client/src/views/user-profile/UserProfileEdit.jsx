@@ -17,9 +17,9 @@ import Constants from '../../constants/Constants'
 
 import Button from '../../components/elements/Button'
 
-class EditProfile extends Component {
-    constructor() {
-        super()
+class UserProfileEdit extends Component {
+    constructor(props) {
+        super(props)
 
         this.state = {
             bio: '',
@@ -28,34 +28,36 @@ class EditProfile extends Component {
             location: '',
             skills: '',
             status: '',
-
             website: '',
             githubusername: '',
-
             facebook: '',
             instagram: '',
             linkedin: '',
             twitter: '',
             youtube: '',
-
             errors: {}
         }
 
-        this.updateProfileState = this.updateProfileState.bind(this)
+        this.handleTextChange = this.handleTextChange.bind(this)
         this.sendProfileUpdate = this.sendProfileUpdate.bind(this)
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
         const { errors, userProfile } = nextProps
-        const { profile } = userProfile
+        const { profile = {} } = userProfile
 
-        let derivedState = {}
+        let derivedState = {
+            handle: profile.handle,
+            bio: profile.bio,
+            company: profile.company,
+            location: profile.location,
+            website: profile.website,
+            githubusername: profile.githubusername
+        }
 
         if (errors) {
             derivedState.errors = errors
         }
-
-        derivedState = Object.assign({}, derivedState, profile)
 
         if (profile && profile.skills) {
             derivedState.skills = profile.skills.join(',')
@@ -78,8 +80,8 @@ class EditProfile extends Component {
         userProfileActions.getCurrentProfile()
     }
 
-    updateProfileState(name, value) {
-        this.setState({ [name]: value })
+    handleTextChange(name, text) {
+        this.setState({ [name]: text })
     }
 
     sendProfileUpdate(e) {
@@ -151,7 +153,7 @@ class EditProfile extends Component {
                                 errorText={errors.handle}
                                 label="Handle"
                                 name="handle"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextChange}
                                 required
                                 value={handle}
                             />
@@ -159,21 +161,21 @@ class EditProfile extends Component {
                                 errorText={errors.bio}
                                 label="Bio"
                                 name="bio"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextChange}
                                 value={bio}
                             />
                             <TextInput
                                 errorText={errors.company}
                                 label="Company"
                                 name="company"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextChange}
                                 value={company}
                             />
                             <TextInput
                                 errorText={errors.location}
                                 label="Location"
                                 name="location"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextChange}
                                 value={location}
                             />
                             <hr />
@@ -182,7 +184,7 @@ class EditProfile extends Component {
                                 helpText="Must be comma separated."
                                 label="Skills"
                                 name="skills"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextChange}
                                 required
                                 value={skills}
                             />
@@ -190,7 +192,7 @@ class EditProfile extends Component {
                                 errorText={errors.status}
                                 label="Status"
                                 name="status"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextChange}
                                 options={Constants.ARRAY_OF_STATUSES}
                                 required
                                 value={status}
@@ -200,14 +202,14 @@ class EditProfile extends Component {
                                 errorText={errors.website}
                                 label="Website URL"
                                 name="website"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextChange}
                                 value={website}
                             />
                             <TextInput
                                 errorText={errors.githubusername}
                                 label="GitHub Username"
                                 name="githubusername"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextChange}
                                 value={githubusername}
                             />
                             <hr />
@@ -215,7 +217,7 @@ class EditProfile extends Component {
                                 errorText={errors.facebook}
                                 label="Facebook"
                                 name="facebook"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextChange}
                                 optional
                                 value={facebook}
                             />
@@ -223,7 +225,7 @@ class EditProfile extends Component {
                                 errorText={errors.twitter}
                                 label="Twitter"
                                 name="twitter"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextChange}
                                 optional
                                 value={twitter}
                             />
@@ -231,7 +233,7 @@ class EditProfile extends Component {
                                 errorText={errors.instagram}
                                 label="Instagram"
                                 name="instagram"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextChange}
                                 optional
                                 value={instagram}
                             />
@@ -239,7 +241,7 @@ class EditProfile extends Component {
                                 errorText={errors.youtube}
                                 label="YouTube"
                                 name="youtube"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextChange}
                                 optional
                                 value={youtube}
                             />
@@ -247,7 +249,7 @@ class EditProfile extends Component {
                                 errorText={errors.linkedin}
                                 label="LinkedIn"
                                 name="linkedin"
-                                onTextChange={this.updateProfileState}
+                                onTextChange={this.handleTextChange}
                                 optional
                                 value={linkedin}
                             />
@@ -265,7 +267,7 @@ class EditProfile extends Component {
     }
 }
 
-EditProfile.propTypes = {
+UserProfileEdit.propTypes = {
     errors: PropTypes.object.isRequired,
     userProfile: PropTypes.object.isRequired
 }
@@ -288,4 +290,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withRouter(EditProfile))
+)(withRouter(UserProfileEdit))

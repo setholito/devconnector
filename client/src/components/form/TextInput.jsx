@@ -3,15 +3,17 @@ import PropTypes from 'prop-types'
 import Content from '../../constants/Content'
 
 class TextInput extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.handleTextChange = this.handleTextChange.bind(this)
     }
 
     handleTextChange(e) {
+        const { onTextChange } = this.props
         const { name, value } = e.target
-        this.props.onTextChange(name, value)
+
+        onTextChange(name, value)
     }
 
     render() {

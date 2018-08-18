@@ -108,7 +108,7 @@ router.post(
                 .then(post => {
                     if (
                         post.likes.filter(
-                            item => like.user.toString() === req.user.id
+                            item => item.user.toString() === req.user.id
                         ).length > 0
                     ) {
                         return res.status(400).json({
@@ -168,7 +168,7 @@ router.post(
 // @desc     Add comment to post
 // @acccess  Private
 router.post(
-    '/comment/:id',
+    '/:id/comment',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
         const { errors, isValid } = validatePostInput(req.body)
@@ -206,7 +206,7 @@ router.post(
 // @desc     Remove comment from post
 // @acccess  Private
 router.delete(
-    '/comment/:id/:comment_id',
+    '/:id/comment/:comment_id',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
         Post.findById(req.params.id)

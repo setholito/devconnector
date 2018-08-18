@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import Content from '../../constants/Content'
 
 class TextArea extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.handleTextChange = this.handleTextChange.bind(this)
     }

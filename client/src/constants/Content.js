@@ -1,10 +1,12 @@
 module.exports = {
-    // BUTTONS ==========
-    COMMENT_BUTTON: 'Comment',
-    DELETE_BUTTON: 'Delete',
-
     // SITE ==========
     SITE_TITLE: 'DevConnector',
+
+    // BUTTONS ==========
+    COMMENT_BUTTON: 'Comments',
+    DELETE_BUTTON: 'Delete',
+    LIKE_BUTTON_TEXT: 'Like',
+    LIKED_BUTTON_TEXT: 'Liked',
 
     // AUTH ==========
     LOGIN_HEADING: 'Login',
@@ -46,11 +48,5 @@ module.exports = {
     ADD_EXPERIENCE_HEADING: 'Add Experience',
 
     // EDUCATION ==========
-    ADD_EDUCATION_HEADING: 'Add Education',
-
-    // FEED ==========
-    FEED_DATE: 'Date',
-    FEED_COMMENTS: 'Comments',
-    FEED_LIKES: 'Likes',
-    FEED_CONTENT: 'Content'
+    ADD_EDUCATION_HEADING: 'Add Education'
 }

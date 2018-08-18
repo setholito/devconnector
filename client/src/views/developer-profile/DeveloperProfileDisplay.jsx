@@ -10,8 +10,8 @@ import CenteredContainer from '../../components/layout/CenteredContainer'
 import { getSafe } from '../../utils/utilFunctions'
 
 class DeveloperProfileDisplay extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             profile: {
